@@ -29,5 +29,25 @@
         <input type="submit" value="Login">
       <div>
 </form>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+   $(document).ready(function() {
+      $("#form").validate();
+   });
+   jQuery(document).ready(function() {
+   jQuery("#forms).validate({
+      rules: {
+         username: {
+            required: true,
+            maxlength: 20,
+             },
+        password: {
+          required: true,
+          minlength: 5,
+          maxlength: 20,
+        }
+      }
+    });
+});
+</script>
     </body>
 </html>
