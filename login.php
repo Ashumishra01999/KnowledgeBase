@@ -12,8 +12,8 @@
           align: center;
         }
         </style>
-        <script src="vendor/jquery-validation/dist/jquery.validate.min.js"></script>
-        <script src="js/form-validation.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
 
     </head>
     <body>
@@ -48,7 +48,7 @@
         password: {
           required: true,
           minlength: 5,
-          maxlenght: 20
+          maxlength: 20
         }
       },
       // Specify validation error messages
