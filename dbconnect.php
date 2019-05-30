@@ -19,7 +19,7 @@ ini_set('display_errors', 1);
     {
       global $dblink;
       $query = $dblink->prepare("SELECT id, username FROM login_credentials WHERE username = ? AND password = ?");
-      $query->bind_param("ss", $_POST['username'], $_POST['password']);
+      $query->bind_param("ss", $username, $password);
       $query->execute();
       return $query->get_result();
     }

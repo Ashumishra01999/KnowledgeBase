@@ -6,6 +6,7 @@
           margin: auto;
           width: 20%;
           padding: 10%;
+          border: 2px dotted blue
         }
         h1 {
           align: center;
