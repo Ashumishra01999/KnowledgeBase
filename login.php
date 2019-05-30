@@ -6,10 +6,12 @@
           margin: auto;
           width: 20%;
           padding: 10%;
-          border: 2px dotted blue
         }
         h1 {
           align: center;
+        }
+        body {
+          background-color: #ffeadd;
         }
         </style>
         <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
@@ -54,14 +56,14 @@
       // Specify validation error messages
       messages: {
         username: {
-          required: "Please provide a username",
-          minlength: "Your username must be at least 5 characters long",
-          maxlength: "Your username must be less than 20 characters long"
+          required: "<br>Please provide a username",
+          minlength: "<br>Your username must be at least 5 characters long",
+          maxlength: "<br>Your username must be less than 20 characters long"
         },
         password: {
-          required: "Please provide a password",
-          minlength: "Your password must be at least 5 characters long",
-          maxlength: "Your password must be less than 20 characters long"
+          required: "<br>Please provide a password",
+          minlength: "<br>Your password must be at least 5 characters long",
+          maxlength: "<br>Your password must be less than 20 characters long"
         },
       },
       // Make sure the form is submitted to the destination defined
