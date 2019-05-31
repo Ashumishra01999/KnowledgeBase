@@ -23,5 +23,12 @@ ini_set('display_errors', 1);
       $query->execute();
       return $query->get_result();
     }
+    public function addIssue($title, $description, $resolution, $user_id)
+    {
+      global $dblink;
+      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id) values("?", "?", "?", "?")");
+      $query->bind_param("sssi", $title, $description, $resolution, $user_id);
+      $query->execute();
+    }
   }
  ?>
