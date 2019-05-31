@@ -9,7 +9,7 @@ if($result->num_rows > 0)
 {
   session_start();
   $_SESSION['username'] = $_POST['username'];
-  $_SESSION['user_id'] = $row['id']
+  $_SESSION['user_id'] = $row['id'];
   header("Location:dashboard.php");
 }
 else {

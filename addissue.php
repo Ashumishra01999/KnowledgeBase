@@ -1,5 +1,8 @@
 <html>
     <head>
+      <?php
+      session_start();
+      ?>
         <title>Register - Knowledge Center</title>
         <style>
         div.registrationForm {
@@ -24,10 +27,8 @@
     </head>
     <body>
       <?php
-      if(isset($_POST['submit']))
-      {
-
-      }
+      echo $_SESSION['username'];
+      echo $_SESSION['user_id'];
       ?>
       <div class="registrationForm">
         <form action="submitissue.php" method="post">

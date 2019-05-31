@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
   class dbconnector
   {
@@ -26,7 +27,8 @@ ini_set('display_errors', 1);
     public function addIssue($title, $description, $resolution, $user_id)
     {
       global $dblink;
-      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id) values("?", "?", "?", "?")");
+      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id) values(?, ?, ?, ?)");
+      echo gettype($user_id);
       $query->bind_param("sssi", $title, $description, $resolution, $user_id);
       return $query->execute();
     }

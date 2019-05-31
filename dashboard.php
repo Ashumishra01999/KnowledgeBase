@@ -1,5 +1,8 @@
 <html>
 <head>
+  <?php 
+  session_start();
+  ?>
 <style>
 
 
@@ -46,7 +49,7 @@
     <form action="validate.php" method="post" name="centernav">
   <input type="text"  placeholder="Search..">
 <div class="addnew">
-    <a href="#addissue" class="active">Add issue</a>
+    <a href="addissue.php" class="active">Add issue</a>
     <form action="addissue.php" method="post" name="Add issue">
 </div>
   </div>
