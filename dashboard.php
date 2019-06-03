@@ -10,7 +10,7 @@ if(isset($_SESSION['username']))
 <html>
 <head>
 
-
+<style>
 .centernav {
   overflow: hidden;
   font-size: 20%;
