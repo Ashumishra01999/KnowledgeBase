@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['username']))
+if(!isset($_SESSION['username']))
 {
      echo "<h3>Logged in as user - {$_SESSION['username']}</h3>";
      echo "<hr>";
@@ -54,7 +54,7 @@ if(isset($_SESSION['username']))
 
 <div class="centernav">
     <form action="validate.php" method="post" name="centernav">
-  <input type="text"  placeholder="Search..">
+  <input type="text"  placeholder="Search.." id="searchbox">
 <div class="addnew">
     <a href="addissue.php" class="active">Add issue</a>
     <form action="addissue.php" method="post" name="Add issue">
@@ -69,4 +69,12 @@ else
 echo "<h3>Unauthorised Access<h3>";
 }
 
+
+
 ?>
+
+<script type="text/javascript">
+$('.school').autocomplete({
+          source: "fetchresults.php"
+      });
+</script>
