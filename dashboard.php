@@ -1,8 +1,15 @@
+<?php
+session_start();
+
+if(isset($_SESSION['username']))
+{
+     echo "<h3>Logged in as user - {$_SESSION['username']}</h3>";
+     echo "<hr>";
+     echo '<a href="logout.php">Logout</a>';
+?>
 <html>
 <head>
-  <?php 
-  session_start();
-  ?>
+
 <style>
 
 
@@ -55,3 +62,11 @@
   </div>
 </body>
 </html>
+<?php
+}
+else
+{
+echo "<h3>Unauthorised Access<h3>";
+}
+
+?>
