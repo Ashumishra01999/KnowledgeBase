@@ -46,7 +46,8 @@ error_reporting(E_ALL);
         }
       }
 
-     return $dblink->query($query);
+     $result = $dblink->query($query);
+     return $result->fetch_all(MYSQLI_ASSOC);
     }
   }
  ?>
