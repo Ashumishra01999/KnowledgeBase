@@ -1,3 +1,4 @@
+//https://www.w3schools.com/howto/howto_css_search_button.asp
 <?php
 session_start();
 
@@ -10,6 +11,7 @@ if(isset($_SESSION['username']))
 <html>
 <head>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 .centernav {
   overflow: hidden;
@@ -24,6 +26,20 @@ if(isset($_SESSION['username']))
   background-color: rgba(0, 0, 0, 0.1);
   border: 2px solid #FFFF
 
+}
+.centernav button {
+  float: left;
+  width: 5%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none; /* Prevent double borders */
+  cursor: pointer;
+}
+.centernave button:hover {
+  background: #0b7dda;
 }
 .addnew{
   width:100%;
@@ -53,6 +69,7 @@ if(isset($_SESSION['username']))
 <div class="centernav">
     <form action="validate.php" method="post" name="centernav">
   <input type="text"  placeholder="Search.." class="searchbox">
+  <button type="submit"><i class="fa fa-search"></i></button>
 <div class="addnew">
     <a href="addissue.php" class="active">Add issue</a>
     <form action="addissue.php" method="post" name="Add issue">
