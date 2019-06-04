@@ -28,18 +28,23 @@ if(isset($_SESSION['username']))
 
 }
 .centernav button {
-  float: left;
+  float: none;
   width: 5%;
-  padding: 10px;
+  padding: 25px;
   background: #2196F3;
   color: white;
-  font-size: 17px;
-  border: 1px solid grey;
+  font-size: 20px;
+  border: 2px solid grey;
   border-left: none; /* Prevent double borders */
   cursor: pointer;
 }
 .centernave button:hover {
   background: #0b7dda;
+}
+.centernav::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 .addnew{
   width:100%;
@@ -67,7 +72,7 @@ if(isset($_SESSION['username']))
 <body>
 
 <div class="centernav">
-    <form action="validate.php" method="post" name="centernav">
+    <form action="validate.php" method="get" name="centernav">
   <input type="text"  placeholder="Search.." class="searchbox">
   <button type="submit"><i class="fa fa-search"></i></button>
 <div class="addnew">
