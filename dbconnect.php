@@ -36,10 +36,12 @@ error_reporting(E_ALL);
     {
       global $dblink;
       $keyword = explode(" ", $query]);
-      $query ="SELECT post_id, title, FROM table1 WHERE title like '%" . $keyword[0] . "%'";
+      $query ="SELECT post_id, title, description FROM posts WHERE title like '%" . $keyword[0] . "%'";
 
-     for($i = 1; $i < count($keyword); $i++) {
-        if(!empty($keyword[$i])) {
+     for($i = 1; $i < count($keyword); $i++)
+     {
+        if(!empty($keyword[$i]))
+        {
             $query .= " AND title like '%" . $keyword[$i] . "%'";
         }
       }
