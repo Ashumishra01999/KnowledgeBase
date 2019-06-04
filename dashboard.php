@@ -72,7 +72,7 @@ if(isset($_SESSION['username']))
 
 <div class="centernav">
     <form action="search.php" method="get" name="centernav">
-  <input type="text"  placeholder="Search.." class="searchbox">
+  <input type="text"  placeholder="Search.." class="searchbox" name="query">
   <button type="submit"><i class="fa fa-search"></i></button>
 <div class="addnew">
     <a href="addissue.php" class="active">Add issue</a>
