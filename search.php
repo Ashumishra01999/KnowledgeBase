@@ -24,12 +24,17 @@ require_once('dbconnect.php');
     $dbconnection = new dbconnector;
     $dbconnection->connect();
     $rows = $dbconnection->search($_GET['query']);
-    echo '<table>';
+    echo '<hr>';
+    echo('<table border="1">'."\n");
+    // $i = 0;
     if(count($rows) > 0){
-      echo '<tr>';
-      echo "<td>$rows[0]->['title']";
-      echo '</td>';
-      echo '</tr>';
+      foreach ($rows as $row) {
+        echo '<tr>';
+        echo '<td>';
+        echo $row['title'];
+        echo '</td>';
+        echo '</tr>';
+      }
     }
 
      ?>
