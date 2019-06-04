@@ -1,4 +1,4 @@
-//https://www.w3schools.com/howto/howto_css_search_button.asp
+
 <?php
 session_start();
 
@@ -29,22 +29,21 @@ if(isset($_SESSION['username']))
 }
 .centernav button {
   float: none;
-  width: 5%;
-  padding: 25px;
+  padding: 6px;
   background: #2196F3;
   color: white;
-  font-size: 20px;
-  border: 2px solid grey;
-  border-left: none; /* Prevent double borders */
+  border-left: none; /* Pevent double borders */
   cursor: pointer;
+}
+.centernav button[type=submit] {
+
+  font-size: 48px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px solid #FFFF
+
 }
 .centernave button:hover {
   background: #0b7dda;
-}
-.centernav::after {
-  content: "";
-  clear: both;
-  display: table;
 }
 .addnew{
   width:100%;
@@ -72,7 +71,7 @@ if(isset($_SESSION['username']))
 <body>
 
 <div class="centernav">
-    <form action="validate.php" method="get" name="centernav">
+    <form action="search.php" method="get" name="centernav">
   <input type="text"  placeholder="Search.." class="searchbox">
   <button type="submit"><i class="fa fa-search"></i></button>
 <div class="addnew">
