@@ -16,7 +16,7 @@ error_reporting(E_ALL);
       }
     }
 
-    public function chechLogin($username, $password)
+    public function checkLogin($username, $password)
     {
       global $dblink;
       $query = $dblink->prepare("SELECT id, username FROM login_credentials WHERE username = ? AND password = ?");
