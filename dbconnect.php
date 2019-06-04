@@ -44,7 +44,7 @@ error_reporting(E_ALL);
         }
       }
 
-     $result = $dblink->query($query);
+     return $dblink->query($query);
     }
   }
  ?>
