@@ -35,7 +35,7 @@ error_reporting(E_ALL);
     public function search($query)
     {
       global $dblink;
-      $keyword = explode(" ", $query]);
+      $keyword = explode(" ", $query);
       $query ="SELECT post_id, title, description FROM posts WHERE title like '%" . $keyword[0] . "%'";
 
      for($i = 1; $i < count($keyword); $i++)
