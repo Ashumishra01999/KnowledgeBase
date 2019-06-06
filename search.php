@@ -16,7 +16,7 @@ if(!isset($_SESSION['username']))
       display: flex;
     }
 
-    .wrapper>div {
+    .wrapper>section {
       font-size: 4vh;
       color: black;
       margin: .1em;
@@ -26,9 +26,16 @@ if(!isset($_SESSION['username']))
     }
 
     div.resultcontainer {
+      display: block;
+      margin: 2% auto;
       text-align: center;
+      border: 2px solid #3498db;
       width: 60%;
+      outline: none;
+    }
 
+    div.searchcontainer {
+      width:100%;
     }
 
     form.searchform {
@@ -70,14 +77,14 @@ if(!isset($_SESSION['username']))
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class"searchcontainer">
+  <section class="wrapper">
+    <div class="searchcontainer">
       <form class="searchform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
         <input type="text" name="searchbox" class="searchbox" id="searchbox" placeholder="Search">
         <input type="submit" name="submitButton" class="submitButton" value="Search">
     </div>
-  </div>
-  <div class="wrapper">
+  </section>
+  <section class="wrapper">
     <div class="resultcontainer">
       <?php
           $dbconnection = new dbconnector;
@@ -96,6 +103,6 @@ if(!isset($_SESSION['username']))
           }
           ?>
     </div>
-  </div>
+  </section>
 </body>
 </html>
