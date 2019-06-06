@@ -4,33 +4,33 @@
       session_start();
       ?>
         <title>Register - Knowledge Center</title>
-        <style>
-        div.registrationForm {
+        <!-- <style>
+        .isssueForm {
           margin: auto;
           width: 55%;
           padding: 12%;
           text-align: center;
 
         }
-        h1 {
+        .isssueForm h1 {
           align: center;
         }
-        table, th, td {
+        .isssueForm table, th, td {
           border: 1px solid black;
           border-collapse: collapse;
         }
-        td.button {
+        .isssueForm td .button {
           text-align: center;
         }
-        </style>
-
+        </style> -->
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
       <?php
       echo $_SESSION['username'];
       echo $_SESSION['user_id'];
       ?>
-      <div class="registrationForm">
+      <div class="isssueForm">
         <form action="submitissue.php" method="post">
           <table style="height:50%">
             <tr>

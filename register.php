@@ -1,7 +1,7 @@
 <html>
     <head>
         <title>Register - Knowledge Center</title>
-        <style>
+        <!-- <style>
         div.registrationForm {
           margin: auto;
           width: 20%;
@@ -17,7 +17,8 @@
         td.button {
           text-align: center;
         }
-        </style>
+        </style> -->
+        <link rel="stylesheet" href="style.css">
 
     </head>
     <body>
