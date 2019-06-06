@@ -1,20 +1,46 @@
+.loginForm {
+  margin: auto;
+  width: 20%;
+  padding: 10%;
+}
 
-<?php
-session_start();
+.loginform h1 {
+  align: center;
+}
+.registrationForm {
+  margin: auto;
+  width: 20%;
+  padding: 10%;
+}
+.registrationForm h1 {
+  align: center;
+}
+.registrationForm table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.registrationForm td.button {
+  text-align: center;
+}
 
-if(isset($_SESSION['username']))
-{
-     echo "<h3>Logged in as user - {$_SESSION['username']}</h3>";
-     echo "<hr>";
-     echo '<a href="logout.php">Logout</a>';
-?>
-<html>
-<head>
+.isssueForm {
+  margin: auto;
+  width: 55%;
+  padding: 12%;
+  text-align: center;
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="style.css">
-<!--
-<style>
+}
+.isssueForm h1 {
+  align: center;
+}
+.isssueForm table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.isssueForm td .button {
+  text-align: center;
+}
+
 .searchcontainer {
   overflow: hidden;
   font-size: 20%;
@@ -66,30 +92,4 @@ if(isset($_SESSION['username']))
   text-decoration: none;
   font-size: 17px;
   border: 2px solid ;
-}
-</style> -->
-</head>
-
-<body>
-
-<div class="searchcontainer">
-    <form action="search.php" method="get" name="searchform" class="searchform">
-  <input type="text"  placeholder="Search.." class="searchbox" name="query">
-  <button type="submit"><i class="fa fa-search"></i></button>
-<div class="addnew">
-    <a href="addissue.php" class="active">Add issue</a>
-    <form action="addissue.php" method="post" name="Add issue">
-</div>
-  </div>
-</body>
-</html>
-<?php
-}
-else
-{
-echo "<h3>Unauthorised Access<h3>";
-}
-
-
-
-?>
+/* } */
