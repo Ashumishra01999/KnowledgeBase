@@ -40,39 +40,6 @@
 .isssueForm td .button {
   text-align: center;
 }
-
-.searchcontainer {
-  overflow: hidden;
-  font-size: 20%;
-  text-align: center;
-  margin-top: 15%;
-  /* padding: 6px; */
-}
-.searchcontainer input[type=text] {
-
-  font-size: 50px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 2px solid #FFFF
-
-}
-.searchcontainer button {
-  float: none;
-  padding: 6px;
-  background: #2196F3;
-  color: white;
-  border-left: none; /* Pevent double borders */
-  cursor: pointer;
-}
-.searchcontainer button[type=submit] {
-
-  font-size: 48px;
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 2px solid #FFFF
-
-}
-.searchcontainer button:hover {
-  background: #0b7dda;
-}
 .addnew{
   width:100%;
   overflow: hidden;
