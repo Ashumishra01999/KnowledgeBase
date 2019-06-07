@@ -25,17 +25,30 @@ if(!isset($_SESSION['username']))
       flex: 1;
     }
 
+
     div.resultcontainer {
       display: block;
-      margin: 2% auto;
-      text-align: center;
-      border: 2px solid #3498db;
-      width: 60%;
+      margin: auto;
+      width: 50%;
       outline: none;
     }
 
     div.searchcontainer {
       width:100%;
+    }
+
+    div.result {
+      width:97%;
+      overflow: hidden;
+      margin-top: 1%;
+      margin-bottom: 1%;
+      padding: 1%;
+      border: 2px solid #c3c3c3;
+      border-radius: 20px;
+    }
+    div.result:hover {
+      border: 2px solid #898989;
+      border-radius: 20px;
     }
 
     form.searchform {
@@ -84,22 +97,30 @@ if(!isset($_SESSION['username']))
         <input type="submit" name="submitButton" class="submitButton" value="Search">
     </div>
   </section>
+  <hr>
   <section class="wrapper">
     <div class="resultcontainer">
       <?php
           $dbconnection = new dbconnector;
           $dbconnection->connect();
           $rows = $dbconnection->search($_GET['searchbox']);
-          echo('<table border="1">'."\n");
           // $i = 0;
           if(count($rows) > 0){
             foreach ($rows as $row) {
-              echo '<tr>';
-              echo '<td>';
-              echo $row['title'];
-              echo '</td>';
-              echo '</tr>';
+              $post = $row['description'];
+              $description_len = strlen($post);
+              $index_lim = $description_len < 100 ? $description_len - 1 : 99;
+              $link = 'post.php?post_id='.$row['post_id'];
+              echo "<div class='result'>";
+              echo "<a href='".$link."'>".$row['title']."</a>";
+              echo "<p>".substr($post, 0, $index_lim)."</p>";
+              echo "</div>";
             }
+          }
+          else {
+            echo "<div class='result'>";
+            echo "No Matching Issues Found";
+            echo "</div>";
           }
           ?>
     </div>
