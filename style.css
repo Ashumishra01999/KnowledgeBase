@@ -46,7 +46,7 @@
   font-size: 20%;
   text-align: center;
   margin-top: 15%;
-  padding: 6px;
+  /* padding: 6px; */
 }
 .searchcontainer input[type=text] {
 
@@ -83,6 +83,7 @@
   right:0;
   margin-top: 5px;
   margin-right: 3px;
+
 }
 .addnew a {
   float: right;
@@ -92,4 +93,36 @@
   text-decoration: none;
   font-size: 17px;
   border: 2px solid ;
+}
+
+.submitButton {
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  /* margin: 100px auto; */
+  border: 2px solid #2ecc71;
+  background: #2ecc71;
+  padding-top: 8px;
+  padding-bottom: 13px;
+  width: 10%;
+  outline: none;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 20px;
+  /* padding-bottom: 30px; */
+}
+
+.searchbox {
+  display: inline-block;
+  /* margin: 2% auto; */
+  text-align: center;
+  border: 2px solid #3498db;
+  padding: 14px 10px;
+  width: 50%;
+  outline: none;
+  color: black;
+  border-radius: 20px;
+}
+
 /* } */
