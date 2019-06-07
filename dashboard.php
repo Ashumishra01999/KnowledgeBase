@@ -11,7 +11,7 @@ if(isset($_SESSION['username']))
 <html>
 <head>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
 <link rel="stylesheet" href="style.css">
 <!--
 <style>
@@ -72,10 +72,11 @@ if(isset($_SESSION['username']))
 
 <body>
 
-<div class="searchcontainer">
+<div class="container">
     <form action="search.php" method="get" name="searchform" class="searchform">
   <input type="text"  placeholder="Search.." class="searchbox" name="searchbox">
-  <button type="submit"><i class="fa fa-search"></i></button>
+  <input type="submit" name="submitButton" class="submitButton" value="Search">
+</div>
 <div class="addnew">
     <a href="addissue.php" class="active">Add issue</a>
     <form action="addissue.php" method="post" name="Add issue">
