@@ -117,6 +117,8 @@
   display: inline-block;
   /* margin: 2% auto; */
   text-align: center;
+  margin-top: 15%;
+  margin-left: 20%;
   border: 2px solid #3498db;
   padding: 14px 10px;
   width: 50%;
@@ -124,5 +126,4 @@
   color: black;
   border-radius: 20px;
 }
-
 /* } */
