@@ -49,6 +49,7 @@ if(!isset($_SESSION['username']))
     div.result:hover {
       border: 2px solid #898989;
       border-radius: 20px;
+      background: #dddbdb;
     }
 
     form.searchform {
@@ -93,7 +94,7 @@ if(!isset($_SESSION['username']))
   <section class="wrapper">
     <div class="searchcontainer">
       <form class="searchform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-        <input type="text" name="searchbox" class="searchbox" id="searchbox" placeholder="Search">
+        <input type="text" name="searchbox" class="searchbox" id="searchbox" placeholder=<?php $placeholder = !isset($_GET['searchbox'])? "Search" : '"'.$_GET['searchbox'].'"'; echo $placeholder;?>>
         <input type="submit" name="submitButton" class="submitButton" value="Search">
     </div>
   </section>
@@ -101,6 +102,10 @@ if(!isset($_SESSION['username']))
   <section class="wrapper">
     <div class="resultcontainer">
       <?php
+          if(!isset($_GET['searchbox']))
+          {
+            die("<div class='result'>Please Enter a Query</div>");
+          }
           $dbconnection = new dbconnector;
           $dbconnection->connect();
           $rows = $dbconnection->search($_GET['searchbox']);
@@ -109,11 +114,11 @@ if(!isset($_SESSION['username']))
             foreach ($rows as $row) {
               $post = $row['description'];
               $description_len = strlen($post);
-              $index_lim = $description_len < 100 ? $description_len - 1 : 99;
+              $index_lim = $description_len < 300 ? $description_len - 1 : 299;
               $link = 'post.php?post_id='.$row['post_id'];
               echo "<div class='result'>";
               echo "<a href='".$link."'>".$row['title']."</a>";
-              echo "<p>".substr($post, 0, $index_lim)."</p>";
+              echo "<p>".substr($post, 0, $index_lim)."...</p>";
               echo "</div>";
             }
           }
