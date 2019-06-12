@@ -29,9 +29,18 @@ else
     border-radius: 3px;
     flex: 1;
   }
+
+  nav {
+    width: 85%;
+  }
+  div.userpanel {
+    width: 15%;
+    text-align: right;
+    padding: 0% 0.5%;
+  }
 div.postcontainer{
   display: block;
-  margin: 2% auto;
+  margin: 2%;
   margin-left:10%;
   border: 2px solid #3498db;
   padding: 14px 10px;
@@ -43,14 +52,15 @@ div.postcontainer{
   div.navbar{
     display: block;
     text-align:right;
-    padding: 14px 10px;
+    padding: 0.5%;
     width: 100%;
     outline: none;
     color: black;
   }
   div.backbuttondiv {
+    margin: 2%;
     width: 5%;
-    height: 4%;
+    height: 3%;
   }
   input.backbutton{
     display: inline-block;
@@ -69,7 +79,9 @@ div.postcontainer{
 </head>
 <body>
   <section class="wrapper">
-  <div class="navbar">
+    <nav>
+    </nav>
+  <div class="userpanel">
     <?php
     echo "<h3>Logged in as user - {$_SESSION['username']}</h3>";
     echo '<a href="logout.php">Logout</a>';

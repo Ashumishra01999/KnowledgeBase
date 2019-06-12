@@ -30,16 +30,16 @@
   text-align: center;
 
 }
-.isssueForm h1 {
-  align: center;
-}
+
 .isssueForm table, th, td {
-  border: 1px solid black;
+  border: none;
   border-collapse: collapse;
 }
-.isssueForm td .button {
+
+.isssueForm td.button {
   text-align: center;
 }
+
 .addnew{
   width:100%;
   overflow: hidden;
