@@ -25,22 +25,26 @@ if(isset($_SESSION['username']))
         <link rel="stylesheet" href="style.css">
 
     </head>
-    <body>
-      <div class="loginForm">
-        <h1>Login</h1>
+    <body class="bg-light" >
+      <section id="login-form">
+      <div class="container">
+        <h1><span class="text-primary">Login</span></h1>
         <form action="validate.php" method="post" name="login">
-        <p>
+        <div class="form-group">
           <label for="username">Username: </label>
           <input type="text" name="username" placeholder="Enter Username" id="username">
-                                                                                                                                <p>
+        </div>
+        <div class="form-group">
           <label for="password">Password: </label>
           <input type="password" name="password" placeholder="Enter Password" id="password"><br>
+        </div>                                                                                                                    <p>
         </p>
         <p>
-          <input type="submit" value="Login">
+          <button type="submit" class="btn">Login</button>
         </p>
-      </div>
       </form>
+      </div>
+    </section>
 
   <script>
         $(function() {
