@@ -123,7 +123,7 @@ if(!isset($_SESSION['username']))
   <section class="wrapper">
     <div class="searchcontainer">
       <form class="searchform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-        <input type="text" name="searchbox" class="searchbox" id="searchbox" placeholder=<?php $placeholder = !isset($_GET['searchbox'])? "Search" : '"'.$_GET['searchbox'].'"'; echo $placeholder;?>>
+        <input type="text" name="query" class="searchbox" id="searchbox" placeholder="Search.."<?php if(isset($_GET['query'])) {echo 'value="'.$_GET['query'].'"';}?>>
         <input type="submit" name="submitButton" class="submitButton" value="Search">
     </div>
   </section>
@@ -138,7 +138,7 @@ if(!isset($_SESSION['username']))
           $.ajax({
               type: "GET",
               url: "rendersearch.php",
-              data: "searchbox=" + $_GET['searchbox']+"&pageNumber="+pageNumber,
+              data: "query=" + $_GET['query']+"&pageNumber="+pageNumber,
               cache: false,
               success: function(html) {
                   $("#resultcontainer").html(html);

@@ -1,12 +1,12 @@
 <?php
 require_once('dbconnect.php');
-if(!isset($_GET['searchbox']))
+if( (!isset($_GET['query']) ) || (strlen($_GET['query'])==0) )
 {
   die("<div class='result'>Please Enter a Query</div>");
 }
 $dbconnection = new dbconnector;
 $dbconnection->connect();
-$rows = $dbconnection->search($_GET['searchbox']);
+$rows = $dbconnection->search($_GET['query']);
 if(!isset($_GET['pageNumber']))
 {
   $pageNumber = 1;
@@ -15,7 +15,7 @@ else
 {
   $pageNumber = $_GET['pageNumber'];
 }
-$perPageCount = 2;
+$perPageCount = 10;
 $count = 0;
 $num_matches = count($rows);
 $pagesCount = ceil($num_matches/$perPageCount);
@@ -56,9 +56,9 @@ else {
           }
         }
 ?>
-        </td>
-        <td align="right" valign="top">Page <?php echo $pageNumber; ?>
-            of <?php echo $pagesCount; ?>
-        </td>
+      </td>
+      <td align="right" valign="top">Page <?php echo $pageNumber; ?>
+        of <?php echo $pagesCount; ?>
+      </td>
     </tr>
 </table>
