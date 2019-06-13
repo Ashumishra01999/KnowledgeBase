@@ -1,11 +1,64 @@
-.loginForm {
-  margin: auto;
-  width: 20%;
-  padding: 10%;
+/* .text-primary{
+  color: #383838;
+} */
+*{
+  box-sizing: border-box;
 }
 
-.loginform h1 {
+html,body{
+  font-family: times, Geneva, Verdana, sans-serif;
+}
+
+.btn{
+  display: inline-block;
+  font-size: 18px;
+  color: #fff;
+  background: #6c6c6c;
+  padding: 5px 28px;
+  border: none;
+  cursor: pointer;
+  font-family: arial;
+}
+
+.btn:hover{
+  background: #5c5c5c;
+}
+
+.bg-light{
+  background: #eeeeee;
+}
+
+#login-form {
+  font-size: 18px;
+  margin: auto;
+  width: 35%;
+  padding-top: 10%;
+}
+
+#login-form .form-group{
+  margin-bottom: 20px;
+}
+
+#login-form .form-group label{
+  color: #5c5c5c;
+  display: block;
+  margin-bottom: 5px;
+}
+
+#login-form .form-group input{
+  width: 100%;
+  padding: 10px;
+  border: 1px #ddd solid;
+}
+
+#login-form input:focus{
+  outline: none;
+  border-color: #5c5c5c;
+}
+
+#login-form h1 {
   align: center;
+  font-size: 30px;
 }
 .registrationForm {
   margin: auto;
