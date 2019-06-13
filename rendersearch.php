@@ -42,7 +42,6 @@ else {
 <div style="height: 30px;"></div>
 <table class ="searchnav" width="50%" align="center">
     <tr>
-      <td valign="top" align="left"></td>
       <td valign="top" align="center">
         <?php
         for ($i = 1; $i <= $pagesCount; $i++) {
@@ -57,7 +56,10 @@ else {
         }
 ?>
       </td>
-      <td align="right" valign="top">Page <?php echo $pageNumber; ?>
+    </tr>
+    <tr><td><br></td></tr>
+    <tr>
+      <td align="center" valign="top">Page <?php echo $pageNumber; ?>
         of <?php echo $pagesCount; ?>
       </td>
     </tr>
