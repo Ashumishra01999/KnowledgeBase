@@ -74,7 +74,7 @@ if(isset($_SESSION['username']))
 
 <div class="container">
     <form action="search.php" method="get" name="searchform" class="searchform">
-  <input type="text"  placeholder="Search.." class="searchbox" name="searchbox">
+  <input type="text"  placeholder="Search.." class="searchbox" name="query">
   <input type="submit" name="submitButton" class="submitButton" value="Search">
 </div>
 <div class="addnew">

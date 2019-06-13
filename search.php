@@ -1,5 +1,4 @@
 <?php
-require_once('dbconnect.php');
 session_start();
 
 if(!isset($_SESSION['username']))
@@ -92,31 +91,65 @@ if(!isset($_SESSION['username']))
       border: 2px solid #3498db;
     }
 
-    table.search-nav {
-      border-collapse:collapse;
-      text-align:left;
-      margin:30px auto 30px;
+    .pages {
+        padding: 10px 14px;
+        color: #000000;
+        border-radius: 50%;
+        background: #CCC;
+        text-decoration: none;
+        margin: 0px 6px;
+        font-size: 0.9em;
+    }
+
+    .pages:hover {
+        color: #ffffff;
+        background: #666;
+    }
+
+    .current {
+        padding: 10px 14px;
+        color: #ffffff;
+        background: #73AD21;
+        text-decoration: none;
+        border-radius: 50%;
+        margin: 0px 6px;
     }
 
   </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 </head>
 
-<body>
+<body class="searchpage">
   <section class="wrapper">
     <div class="searchcontainer">
       <form class="searchform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get">
-        <input type="text" name="searchbox" class="searchbox" id="searchbox" placeholder=<?php $placeholder = !isset($_GET['searchbox'])? "Search" : '"'.$_GET['searchbox'].'"'; echo $placeholder;?>>
+        <input type="text" name="query" class="searchbox" id="searchbox" placeholder="Search.."<?php if(isset($_GET['query'])) {echo 'value="'.$_GET['query'].'"';}?>>
         <input type="submit" name="submitButton" class="submitButton" value="Search">
     </div>
   </section>
   <hr>
   <section class="wrapper">
-    <div class="resultcontainer">
-      <?php
-      require_once('util.php');
-        echo searchhtmlresponse();
-          ?>
-    </div>
+    <div class="resultcontainer" id="resultcontainer"></div>
   </section>
+  <script type="text/javascript">
+      function showRecords(perPageCount, pageNumber) {
+        var $_GET=[];
+        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
+          $.ajax({
+              type: "GET",
+              url: "rendersearch.php",
+              data: "query=" + $_GET['query']+"&pageNumber="+pageNumber,
+              cache: false,
+              success: function(html) {
+                  $("#resultcontainer").html(html);
+                  $('#loader').html('');
+              }
+          });
+      }
+
+      $(document).ready(function() {
+          showRecords(10, 1);
+      });
+  </script>
 </body>
 </html>

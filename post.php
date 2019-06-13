@@ -1,3 +1,18 @@
+<?php
+require_once('dbconnect.php');
+session_start();
+
+if(!isset($_SESSION['username']))
+{
+  die("<h3>Unauthorised Access<h3>");
+}
+else
+{
+  $dbconnection = new dbconnector;
+  $dbconnection->connect();
+  $post = $dbconnection->getPost($_GET['post_id']);
+}
+?>
 <!Doctype html>
 <html>
 <head>
@@ -14,52 +29,77 @@
     border-radius: 3px;
     flex: 1;
   }
-div.postform{
+
+  nav {
+    width: 85%;
+  }
+  div.userpanel {
+    width: 15%;
+    text-align: right;
+    padding: 0% 0.5%;
+  }
+div.postcontainer{
   display: block;
-  margin: 2% auto;
+  margin: 2%;
   margin-left:10%;
-  text-align:center;
   border: 2px solid #3498db;
   padding: 14px 10px;
-  width: 50%;
+  width: 45%;
   outline: none;
   color: black;
   border-radius: 20px;
   }
   div.navbar{
     display: block;
-    margin: 2% auto;
-    text-align:center;
-    border: 2px solid #3498db;
-    padding: 14px 10px;
-    width: 50%;
+    text-align:right;
+    padding: 0.5%;
+    width: 100%;
     outline: none;
     color: black;
-    border-radius: 20px;
   }
-  div.backbutton{
-
+  div.backbuttondiv {
+    margin: 2%;
+    width: 5%;
+    height: 3%;
+  }
+  input.backbutton{
+    display: inline-block;
+    margin: 20px auto;
+    border: 2px solid #2ecc71;
+    background: #2ecc71;
+    padding: 14px 10px;
+    width: 100%;
+    outline: none;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
 
 }
 </style>
 </head>
 <body>
   <section class="wrapper">
-  <div class="navbar">
     <nav>
-
     </nav>
+  <div class="userpanel">
+    <?php
+    echo "<h3>Logged in as user - {$_SESSION['username']}</h3>";
+    echo '<a href="logout.php">Logout</a>';
+    ?>
+  </div>
   </section>
   <hr>
   <section class="wrapper">
-    <div class="postform">
-    <p class="title">title</p>
-    <p class="description">discription</p>
-    <p class="resolution">resolution</p>
+    <div class="postcontainer">
+    <p class="titlelabel"><b>Title</b></p>
+    <p class="title"><?php echo $post['title']; ?></p>
+    <p class="descriptionlabel"><b>Description</b></p>
+    <p class="description"><?php echo $post['description']; ?></p>
+    <p class="resolutionlabel"><b>Resolution</b></p>
+    <p class="resolution"><?php echo $post['resolution']; ?></p>
   </div>
-  <div class="backbutton">
-  <form class="backbutton" action="back.php">
-  <input type="submit"  class="back" value="back">
+  <div class="backbuttondiv">
+  <a href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><input type="button" class="backbutton" value="Back" /></a>
 </div>
   </section>
 

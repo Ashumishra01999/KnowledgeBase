@@ -2,8 +2,12 @@
     <head>
       <?php
       session_start();
+      if(!isset($_SESSION['username']))
+      {
+        die("<h3>Unauthorised Access<h3>");
+      }
       ?>
-        <title>Register - Knowledge Center</title>
+        <title>Add Issue - Knowledge Center</title>
         <!-- <style>
         .isssueForm {
           margin: auto;
@@ -32,7 +36,7 @@
       ?>
       <div class="isssueForm">
         <form action="submitissue.php" method="post">
-          <table style="height:50%">
+          <table style="height:90%">
             <tr>
               <th  colspan="2">Add New Issue</th>
             </tr>
@@ -42,15 +46,15 @@
             </tr>
             <tr>
             <td><label for="des">Description: </label></td>
-            <td><textarea rows="5" cols = "100" name="description" placeholder="Enter Description of the Issue" id="description"></textarea></td>
+            <td><textarea rows="6" cols = "100" name="description" placeholder="Enter Description of the Issue" id="description"></textarea></td>
           </tr>
           <tr>
             <td><label for="res">Resolution: </label></td>
-            <td><textarea rows="5" cols = "100" name="resolution" placeholder="Enter Resolution for the Issue" id="resolution"></textarea></td>
+            <td><textarea rows="6" cols = "100" name="resolution" placeholder="Enter Resolution for the Issue" id="resolution"></textarea></td>
           </tr>
 
           <tr>
-            <td class="button"  colspan="2"><input type="submit" value="Submit" style:></td>
+            <td colspan="2" class="button"><input type="submit" value="Submit" name="addissue"></td>
           </tr>
         </table>
       </form>

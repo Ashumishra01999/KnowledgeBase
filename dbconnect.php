@@ -24,6 +24,7 @@ error_reporting(E_ALL);
       $query->execute();
       return $query->get_result();
     }
+
     public function addIssue($title, $description, $resolution, $user_id)
     {
       global $dblink;
@@ -32,6 +33,7 @@ error_reporting(E_ALL);
       $query->bind_param("sssi", $title, $description, $resolution, $user_id);
       return $query->execute();
     }
+
     public function search($query)
     {
       global $dblink;
@@ -45,9 +47,17 @@ error_reporting(E_ALL);
             $query .= " AND title like '%" . $keyword[$i] . "%'";
         }
       }
+      $result = $dblink->query($query);
+      return $result->fetch_all(MYSQLI_ASSOC);
+    }
 
-     $result = $dblink->query($query);
-     return $result->fetch_all(MYSQLI_ASSOC);
+    public function getPost($post_id)
+    {
+      global $dblink;
+      $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE post_id = ?");
+      $query->bind_param("s", $post_id);
+      $query->execute();
+      return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
     }
   }
  ?>
