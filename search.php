@@ -133,12 +133,17 @@ if(!isset($_SESSION['username']))
   </section>
   <script type="text/javascript">
       function showRecords(perPageCount, pageNumber) {
-        var $_GET=[];
-        window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(a,name,value){$_GET[name]=value;});
-          $.ajax({
+        var query = new RegExp('[\?&]' + 'query' + '=([^&#]*)').exec(window.location.href);
+        if (query==null) {
+          query = '';
+        }
+        else {
+          query = query[1];
+        }
+        $.ajax({
               type: "GET",
               url: "rendersearch.php",
-              data: "query=" + $_GET['query']+"&pageNumber="+pageNumber,
+              data: "query=" + query+"&pageNumber="+pageNumber,
               cache: false,
               success: function(html) {
                   $("#resultcontainer").html(html);

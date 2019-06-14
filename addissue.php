@@ -27,6 +27,8 @@
           text-align: center;
         }
         </style> -->
+        <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -35,7 +37,7 @@
       echo $_SESSION['user_id'];
       ?>
       <div class="isssueForm">
-        <form action="submitissue.php" method="post">
+        <form action="submitissue.php" method="post" name="addissue">
           <table style="height:90%">
             <tr>
               <th  colspan="2">Add New Issue</th>
@@ -59,5 +61,51 @@
         </table>
       </form>
     </div>
+
+    <script>
+          $(function() {
+            // Initialize form validation on the registration form.
+            // It has the name attribute "registration"
+            $("form[name='addissue']").validate({
+            // Specify validation rules
+        rules: {
+          title: {
+            required: true,
+            minlength: 10,
+            maxlength: 250
+          },
+          description: {
+            required: true,
+            minlength: 10
+          },
+          resolution: {
+            required: true,
+            minlength: 10
+          }
+        },
+        // Specify validation error messages
+        messages: {
+          title: {
+            required: "<br>Please provide a title",
+            minlength: "<br>The title must be at least 10 characters long",
+            maxlength: "<br>The title must be less than 250 characters long"
+          },
+          description: {
+            required: "<br>Please provide a description",
+            minlength: "<br>The description must be at least 10 characters long"
+          },
+          resolution: {
+            required: "<br>Please provide a resolution",
+            minlength: "<br>The resolution must be at least 10 characters long"
+          },
+        },
+        // Make sure the form is submitted to the destination defined
+        // in the "action" attribute of the form when valid
+        submitHandler: function(form) {
+          form.submit();
+        }
+      });
+    });
+    </script>
   </body>
 </html>

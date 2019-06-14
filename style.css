@@ -9,6 +9,11 @@ html,body{
   font-family: times, Geneva, Verdana, sans-serif;
 }
 
+div.isssueForm {
+  width: 58%;
+  padding: 1%;
+}
+
 .btn{
   display: inline-block;
   font-size: 18px;
