@@ -45,7 +45,6 @@ div.isssueForm {
 }
 
 #login-form .form-group label{
-  color: #5c5c5c;
   display: block;
   margin-bottom: 5px;
 }
@@ -65,6 +64,7 @@ div.isssueForm {
   align: center;
   font-size: 30px;
 }
+
 .registrationForm {
   margin: auto;
   width: 20%;
@@ -97,7 +97,17 @@ div.isssueForm {
 .isssueForm td.button {
   text-align: center;
 }
-
+label
+{
+  float: left;
+}
+label.error
+{
+   float: none;
+   color: #FF0000;
+   padding-left: 0px;
+   vertical-align: bottom;
+ }
 .addnew{
   width:100%;
   overflow: hidden;
