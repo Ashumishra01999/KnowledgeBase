@@ -1,6 +1,7 @@
 <html>
     <head>
       <?php
+      require_once('util.php');
       session_start();
       if(!isset($_SESSION['username']))
       {
@@ -37,6 +38,16 @@
       echo $_SESSION['user_id'];
       ?>
       <div class="isssueForm">
+        <?php
+         if(isset($_SESSION['error']))
+         {
+           if($_SESSION['error']=='add_issue_failed')
+           {
+             displayerror();
+             unset($_SESSION['error']);
+           }
+         }
+        ?>
         <form action="submitissue.php" method="post" name="addissue">
           <table style="height:90%">
             <tr>

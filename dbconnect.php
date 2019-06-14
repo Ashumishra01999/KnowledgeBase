@@ -29,9 +29,8 @@ error_reporting(E_ALL);
     {
       global $dblink;
       $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id) values(?, ?, ?, ?)");
-      echo gettype($user_id);
       $query->bind_param("sssi", $title, $description, $resolution, $user_id);
-      return $query->execute();
+      return array($query->execute(), $dblink->insert_id);
     }
 
     public function search($query)

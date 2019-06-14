@@ -1,5 +1,6 @@
 <?php
 require_once('dbconnect.php');
+require_once('util.php');
 session_start();
 
 if(!isset($_SESSION['username']))
@@ -91,13 +92,20 @@ div.postcontainer{
   <hr>
   <section class="wrapper">
     <div class="postcontainer">
-    <p class="titlelabel"><b>Title</b></p>
-    <p class="title"><?php echo $post['title']; ?></p>
-    <p class="descriptionlabel"><b>Description</b></p>
-    <p class="description"><?php echo $post['description']; ?></p>
-    <p class="resolutionlabel"><b>Resolution</b></p>
-    <p class="resolution"><?php echo $post['resolution']; ?></p>
-  </div>
+      <?php
+      if(isset($_SESSION['newissue']))
+      {
+        newissue_sucess();
+        unset($_SESSION['newissue']);
+      }
+      ?>
+      <p class="titlelabel"><b>Title</b></p>
+      <p class="title"><?php echo $post['title']; ?></p>
+      <p class="descriptionlabel"><b>Description</b></p>
+      <p class="description"><?php echo $post['description']; ?></p>
+      <p class="resolutionlabel"><b>Resolution</b></p>
+      <p class="resolution"><?php echo $post['resolution']; ?></p>
+    </div>
   <div class="backbuttondiv">
   <a href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><input type="button" class="backbutton" value="Back" /></a>
 </div>
