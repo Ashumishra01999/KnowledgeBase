@@ -12,8 +12,8 @@ function displayerror()
 
 function newissue_mailer($title, $description, $resolution)
 {
-  $from = "sahil.pathania.0070@gmail.com";
-  $to_emails = array("saurabhyadav338@gmail.com", "ashumishra01999@gmail.com", "yf.yousuf95@gmail.com","sahil.pathania.3979@gmail.com");
+  $from = "saurabhyadav9535@gmail.com";
+  $to_emails = array("saurabhyadav338@gmail.com", "ashumishra01999@gmail.com", "yf.yousuf95@gmail.com");
   $subject = "New Issue Created";
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
