@@ -1,50 +1,64 @@
 <?php
+require_once('util.php');
 session_start();
-
 if(isset($_SESSION['username']))
 {
   header("Location:dashboard.php");
 }
 ?>
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <title>Login - Knowledge Center</title>
-        <!-- <style>
-        .loginForm {
-          margin: auto;
-          width: 20%;
-          padding: 10%;
-        }
-        .loginform h1 {
-          align: center;
-        }
-        </style> -->
         <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-        <link rel="stylesheet" href="style.css">
-
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="icon" type="image/png" href="images\favicon.png">
     </head>
-    <body class="bg-light" >
-      <section id="login-form">
-      <div class="container">
-        <h1><span class="text-primary">Login</span></h1>
-        <form action="validate.php" method="post" name="login">
-        <div class="form-group">
-          <label for="username">Username: </label>
-          <input type="text" name="username" placeholder="Enter Username" id="username">
-        </div>
-        <div class="form-group">
-          <label for="password">Password: </label>
-          <input type="password" name="password" placeholder="Enter Password" id="password"><br>
-        </div>                                                                                                                    <p>
-        </p>
-        <p>
-          <button type="submit" class="btn">Login</button>
-        </p>
-      </form>
+    <body>
+      <div class="container-fluid">
+        <nav>
+        </nav>
       </div>
-    </section>
+      <main class="login-main">
+          <div class="container">
+              <div class="loginpage-wrapper">
+                  <div class="loginpanel">
+                    <div class="logintitle">
+                        <p >AIS Knowledge Base </p>
+                    </div>
+                    <?php
+                     if(isset($_SESSION['error']))
+                     {
+                       if($_SESSION['error']=='login')
+                       {
+                         displayerror('login');
+                         unset($_SESSION['error']);
+                       }
+                       elseif($_SESSION['error']=='noaccess')
+                       {
+                         displayerror('noaccess');
+                         unset($_SESSION['error']);
+                       }
+                     }
+                    ?>
+                      <form class="form-default" action="validate.php" method="post" name="login">
+                          <div class="form-group">
+                              <label for="username">Username: </label>
+                              <input type="text" name="username" class="form-control" id="username" placeholder="Enter Username">
+                          </div>
+                          <div class="form-group">
+                              <label for="password">Password: </label>
+                              <input type="password" name="password" class="form-control" id="password" placeholder="Enter Password">
+                          </div>
+                          <div class="form-group">
+                              <button type="submit" class="btn btn-secondary btn-block">Log in</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </main>
 
   <script>
         $(function() {
@@ -68,13 +82,13 @@ if(isset($_SESSION['username']))
       messages: {
         username: {
           required: "<br>Please provide a username",
-          minlength: "<br>Your username must be at least 5 characters long",
-          maxlength: "<br>Your username must be less than 20 characters long"
+          minlength: "<br>The username must be at least 5 characters long",
+          maxlength: "<br>The username must be less than 20 characters long"
         },
         password: {
           required: "<br>Please provide a password",
-          minlength: "<br>Your password must be at least 5 characters long",
-          maxlength: "<br>Your password must be less than 20 characters long"
+          minlength: "<br>The password must be at least 5 characters long",
+          maxlength: "<br>The password must be less than 20 characters long"
         },
       },
       // Make sure the form is submitted to the destination defined

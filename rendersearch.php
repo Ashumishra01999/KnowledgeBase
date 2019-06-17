@@ -1,5 +1,12 @@
 <?php
+session_start();
 require_once('dbconnect.php');
+
+if(!isset($_SESSION['username']))
+{
+     $_SESSION['error'] = 'noaccess';
+     header("Location:login.php");
+}
 if( (!isset($_GET['query']) ) || (strlen($_GET['query'])==0) )
 {
   die("<div class='result'>Please Enter a Query</div>");
@@ -15,7 +22,7 @@ else
 {
   $pageNumber = $_GET['pageNumber'];
 }
-$perPageCount = 10;
+$perPageCount = 5;
 $count = 0;
 $num_matches = count($rows);
 $pagesCount = ceil($num_matches/$perPageCount);
@@ -29,7 +36,7 @@ if($num_matches > 0){
     $link = 'post.php?post_id='.$row['post_id'];
     echo "<div class='result'>";
     echo "<a href='".$link."'>".$row['title']."</a>";
-    echo "<p>".substr($post, 0, $index_lim)."...</p>";
+    echo "<p class = 'res-desc'>".substr($post, 0, $index_lim)."...</p>";
     echo "</div>";
   }
 }
@@ -63,4 +70,5 @@ else {
         of <?php echo $pagesCount; ?>
       </td>
     </tr>
+    <tr><td><br></td></tr>
 </table>

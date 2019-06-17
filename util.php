@@ -5,9 +5,20 @@ function newissue_sucess()
   echo '<p style="color:green;"><b>New Issue Created Successfully</b><p>';
 }
 
-function displayerror()
+function displayerror($source)
 {
-  echo '<p style="color:red;"><b>Unable to Add New Issue. Please Try Again.</b><p>';
+  if($source == 'addissue')
+  {
+    echo '<p style="color:red;"><b>Unable to Add New Issue. Please Try Again.</b><p>';
+  }
+  elseif($source == 'login')
+  {
+    echo '<p style="color:red;"><b>Incorrect Username/Password.</b><p>';
+  }
+  elseif($source == 'noaccess')
+  {
+    echo '<p style="color:red;"><b>Please Login First.</b><p>';
+  }
 }
 
 function newissue_mailer($title, $description, $resolution)

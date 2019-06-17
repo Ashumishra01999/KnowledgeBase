@@ -1,77 +1,77 @@
-<html>
-    <head>
-      <?php
+<?php
       require_once('util.php');
       session_start();
+
       if(!isset($_SESSION['username']))
       {
-        die("<h3>Unauthorised Access<h3>");
+           $_SESSION['error'] = 'noaccess';
+           header("Location:login.php");
       }
-      ?>
+?>
+<!doctype html>
+<html lang="en">
+<head>
         <title>Add Issue - Knowledge Center</title>
-        <!-- <style>
-        .isssueForm {
-          margin: auto;
-          width: 55%;
-          padding: 12%;
-          text-align: center;
-
-        }
-        .isssueForm h1 {
-          align: center;
-        }
-        .isssueForm table, th, td {
-          border: 1px solid black;
-          border-collapse: collapse;
-        }
-        .isssueForm td .button {
-          text-align: center;
-        }
-        </style> -->
         <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-        <link rel="stylesheet" href="style.css">
-    </head>
+        <link rel="stylesheet" href="css\style.css">
+        <link rel="icon" type="image/png" href="images\favicon.png">
+</head>
     <body>
-      <?php
-      echo $_SESSION['username'];
-      echo $_SESSION['user_id'];
-      ?>
-      <div class="isssueForm">
-        <?php
-         if(isset($_SESSION['error']))
-         {
-           if($_SESSION['error']=='add_issue_failed')
+      <header>
+        <div class="logo">
+            <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
+        </div>
+                <nav class="searchres-bar">
+                    <ul class="nav-list">
+                      <li>
+                        <form class="searchform searchform-nav" action="search.php" method="get">
+                            <div class="form-group">
+                                <input type="text" name="query" class="searchbox searchbox-nav" id="username" placeholder="Search..." <?php if(isset($_GET['query'])) {echo 'value="'.$_GET['query'].'"';}?>>
+                                <button type="submit" class="btn btn-secondary searchbtn searchbtn-nav">Search</button>
+                            </div>
+                        </form>
+                      </li>
+                        <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
+                        <li>
+                          <div class="dropdown">
+                            <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
+                            <div class="dropdown-content">
+                            <a href="logout.php">Logout</a>
+                            </div>
+                          </div>
+                        </li>
+                    </ul>
+                </nav>
+      </header>
+      <main>
+        <div class="addnew-main">
+          <?php
+           if(isset($_SESSION['error']))
            {
-             displayerror();
-             unset($_SESSION['error']);
+             if($_SESSION['error']=='add_issue_failed')
+             {
+               displayerror('addissue');
+               unset($_SESSION['error']);
+             }
            }
-         }
-        ?>
-        <form action="submitissue.php" method="post" name="addissue">
-          <table style="height:90%">
-            <tr>
-              <th  colspan="2">Add New Issue</th>
-            </tr>
-            <tr>
-              <td><label for="tit">Title: </label></td>
-              <td><textarea rows="2" cols = "100" name="title" placeholder="Enter Title of the Issue" id="title"></textarea></td>
-            </tr>
-            <tr>
-            <td><label for="des">Description: </label></td>
-            <td><textarea rows="6" cols = "100" name="description" placeholder="Enter Description of the Issue" id="description"></textarea></td>
-          </tr>
-          <tr>
-            <td><label for="res">Resolution: </label></td>
-            <td><textarea rows="6" cols = "100" name="resolution" placeholder="Enter Resolution for the Issue" id="resolution"></textarea></td>
-          </tr>
+          ?>
+        <form class="form-default form-create-topic" action="submitissue.php" method="post" name="addissue">
+                <div class="form-group">
+                    <label for="title">Topic Title</label>
+                        <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">
 
-          <tr>
-            <td colspan="2" class="button"><input type="submit" value="Submit" name="addissue"></td>
-          </tr>
-        </table>
-      </form>
-    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                        <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="resolution">Resolution</label>
+                        <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>
+                </div>
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </form>
 
     <script>
           $(function() {

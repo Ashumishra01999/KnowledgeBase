@@ -19,7 +19,7 @@ error_reporting(E_ALL);
     public function checkLogin($username, $password)
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT id, username FROM login_credentials WHERE username = ? AND password = ?");
+      $query = $dblink->prepare("SELECT id, username, name FROM login_credentials WHERE username = ? AND password = ?");
       $query->bind_param("ss", $username, $password);
       $query->execute();
       return $query->get_result();

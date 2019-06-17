@@ -10,9 +10,13 @@ if($result->num_rows > 0)
   session_start();
   $_SESSION['username'] = $_POST['username'];
   $_SESSION['user_id'] = $row['id'];
+  $_SESSION['name'] = $row['name'];
+  echo $_SESSION['username'].$_SESSION['user_id'].$_SESSION['name'];
   header("Location:dashboard.php");
 }
-else {
-  echo "<p>Invalid Username or Password</p>";
+else
+{
+  $_SESSION['error']='login';
+  header("Location:login.php");
 }
 ?>

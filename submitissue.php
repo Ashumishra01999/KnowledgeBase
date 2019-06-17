@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+if(!isset($_SESSION['username']))
+{
+     $_SESSION['error'] = 'noaccess';
+     header("Location:login.php");
+}
 require_once("dbconnect.php");
 require_once("util.php");
 $dbconnection = new dbconnector;
