@@ -10,11 +10,13 @@ require_once("dbconnect.php");
 require_once("util.php");
 $dbconnection = new dbconnector;
 $dbconnection->connect();
-$success = $dbconnection->addIssue($_POST['title'], $_POST['description'],$_POST['resolution'],$_SESSION['user_id']);
+$UID1= mt_rand(1000000,9999999);
+$UID2= mt_rand(1000000,9999999);
+$success = $dbconnection->addIssue($_POST['title'], $_POST['description'],$_POST['resolution'],$_SESSION['user_id'], $UID1, $UID2);
 if($success[0])
 {
   $_SESSION['newissue']='true';
-  if(newissue_mailer($_POST['title'], $_POST['description'], $_POST['resolution']))
+  if(newissue_mailer($_POST['title'], $_POST['description'], $_POST['resolution'], array($UID1, $UID2)))
   {
     echo "Email sent successfully";
   }

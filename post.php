@@ -69,18 +69,5 @@ $post = $dbconnection->getPost($_GET['post_id']);
   <a class="back-btn" href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><button type="submit" class="nav-btn backbutton">Back</button></a>
 </div>
 </main>
-
-
-
-
-
-
-
-
 </body>
-<footer>
-
-
-
-</footer>
 </html>
