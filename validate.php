@@ -11,7 +11,6 @@ if($result->num_rows > 0)
   $_SESSION['username'] = $_POST['username'];
   $_SESSION['user_id'] = $row['id'];
   $_SESSION['name'] = $row['name'];
-  echo $_SESSION['username'].$_SESSION['user_id'].$_SESSION['name'];
   header("Location:dashboard.php");
 }
 else
