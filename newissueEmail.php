@@ -46,7 +46,7 @@ background-color: #f6f6f6;
 							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 								<tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
 									<td class="content-block" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0; padding: 0 0 20px;" valign="top">
-										<a href="http://kb.arpaninteractive.com/review.php?auth_id='.$auth_id.'" class="btn-primary" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; background-color: #348eda; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">Review Issue</a>
+										<a href="http://localhost/kb/review.php?auth_id='.$auth_id.'" class="btn-primary" style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; background-color: #348eda; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">Review Issue</a>
 									</td>
 								</tr>
 								<tr style="font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -97,6 +97,6 @@ background-color: #f6f6f6;
 </body>
 </html>
 ';
-echo $message;
+return $message;
 }
 ?>

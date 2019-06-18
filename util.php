@@ -1,5 +1,5 @@
 <?php
-require_once(newissueEmail.php);
+require_once('newissueEmail.php');
 function newissue_sucess()
 {
   echo '<p style="color:green;"><b>New Issue Created Successfully</b><p>';

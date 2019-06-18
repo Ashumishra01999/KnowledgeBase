@@ -24,7 +24,8 @@ if($success[0])
   {
     echo "Email failed";
   }
-  header("Location:post.php?post_id=".$success[1]);
+  $_SESSION['error']='noerror';
+  header("Location:addissue.php");
 }
 else {
   $_SESSION['error']='add_issue_failed';

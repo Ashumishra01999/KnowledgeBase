@@ -54,6 +54,11 @@
                displayerror('addissue');
                unset($_SESSION['error']);
              }
+             if($_SESSION['error']=='noerror')
+             {
+               echo '<p style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><p>';
+               unset($_SESSION['error']);
+             }
            }
           ?>
         <form class="form-default form-create-topic" action="submitissue.php" method="post" name="addissue">
@@ -69,7 +74,7 @@
                 <div class="form-group">
                     <label for="resolution">Resolution</label>
                         <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>
-                
+
                 </div>
                 <button type="submit" class="btn btn-secondary">Submit</button>
             </form>

@@ -1,11 +1,19 @@
 <?php
 require_once("dbconnect.php");
-if isset($_GET['auth_id']){
+if(isset($_POST['auth_id']))
+{
   $dbconnection = new dbconnector;
   $dbconnection->connect();
-  $result = $dbconnection->approvepost($_GET['auth_id', 1]);
-  $rows = $result->fetch_array(MYSQLI_ASSOC);
+  $status = $dbconnection->approvepost($_POST['auth_id'], 1);
+  if($status == 1)
+  {
+    echo 'Issue Approved Successfully';
+  }
+  else
+  {
+    echo '1Post unavailable or already approved';
+  }
 }
 else{
-  echo "Post unavailable or already approved";
+  echo "2Post unavailable or already approved";
   }

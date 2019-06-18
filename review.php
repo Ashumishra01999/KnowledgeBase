@@ -54,13 +54,6 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
 
  <main class="post-main">
      <div class="postcontainer">
-       <?php
-       if(isset($_SESSION['newissue']))
-       {
-         newissue_sucess();
-         unset($_SESSION['newissue']);
-       }
-       ?>
        <p class="titlelabel"><b>Title</b></p>
        <p class="title"><?php echo htmlentities($rows['title']); ?></p>
        <p class="descriptionlabel"><b>Description</b></p>
@@ -70,8 +63,8 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
      </div>
      <div class="backbuttondiv">
        <form action="approve.php" method="post">
-         <input type="hidden" name="post_id" value="<?php echo htmlentities($_GET['auth_id']); ?>">
-     <button type="submit" class="nav-btn backbutton">Back</button>
+         <input type="hidden" name="auth_id" value="<?php echo htmlentities($_GET['auth_id']); ?>">
+     <button type="submit" class="nav-btn backbutton">Approve</button>
    </form>
    </div>
  </main>
