@@ -43,7 +43,7 @@ if(!isset($_SESSION['username']))
           <button type="submit" class="btn btn-secondary searchbtn">Search</button>
       </div>
   </form>
-<div>
-<main>
+</div>
+</main>
 </body>
 </html>
