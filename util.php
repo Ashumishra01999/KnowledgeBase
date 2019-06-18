@@ -1,5 +1,5 @@
 <?php
-
+require_once(newissueEmail.php);
 function newissue_sucess()
 {
   echo '<p style="color:green;"><b>New Issue Created Successfully</b><p>';
@@ -21,10 +21,10 @@ function displayerror($source)
   }
 }
 
-function newissue_mailer($title, $description, $resolution)
+function newissue_mailer($title, $description, $resolution, $auth_id)
 {
   $from = "saurabhyadav9535@gmail.com";
-  $to_emails = array("saurabhyadav338@gmail.com", "ashumishra01999@gmail.com", "yf.yousuf95@gmail.com");
+  $to_emails = array("saurabhyadav338@gmail.com","yf.yousuf95@gmail.com");
   $subject = "New Issue Created";
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -33,13 +33,10 @@ function newissue_mailer($title, $description, $resolution)
   $headers .= 'From: '.$from."\r\n".
     'Reply-To: '.$from."\r\n" .
     'X-Mailer: PHP/' . phpversion();
-  $message = '<h2>A new issue has been created with the following details:</h2>';
-  $message .= '<p><h3>Title</h3>'.$title.'</p>';
-  $message .= '<p><h3>Description</h3>'.$description.'</p>';
-  $message .= '<p><h3>Resolution</h3>'.$resolution.'</p>';
   $state = 1;
-  foreach($to_emails as $to_email)
+  foreach($to_emails as $index => $to_email)
   {
+    $message = generateEmail($title, $description, $resolution, $auth_id[$index]);
     if(!mail($to_email, $subject, $message, $headers))
     {
       $state = 0;
