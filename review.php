@@ -6,20 +6,12 @@ $dbconnection = new dbconnector;
 $dbconnection->connect();
 $result = $dbconnection->getunapproved($_GET['auth_id']);
 $rows = $result->fetch_array(MYSQLI_ASSOC);
-// if($result->num_rows > 0){
-// echo "$rows[title]";
-// echo "$rows[description]";
-// echo "$rows[resolution]";
-// }
-// else{
-//   echo "Post unavailable or already approved";
-// }
- ?>
+?>
 
  <!Doctype html>
  <html>
  <head>
-   <title></title>
+   <title>Review Issue - AIS Knowledge Base</title>
    <link rel="stylesheet" href="css\style.css">
    <link rel="icon" type="image/png" href="images\favicon.png">
  </head>
@@ -53,20 +45,31 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
 
 
  <main class="post-main">
-     <div class="postcontainer">
-       <p class="titlelabel"><b>Title</b></p>
-       <p class="title"><?php echo htmlentities($rows['title']); ?></p>
-       <p class="descriptionlabel"><b>Description</b></p>
-       <p class="description"><?php echo htmlentities($rows['description']); ?></p>
-       <p class="resolutionlabel"><b>Resolution</b></p>
-       <p class="resolution"><?php echo htmlentities($rows['resolution']); ?></p>
-     </div>
-     <div class="backbuttondiv">
-       <form action="approve.php" method="post">
-         <input type="hidden" name="auth_id" value="<?php echo htmlentities($_GET['auth_id']); ?>">
-     <button type="submit" class="nav-btn backbutton">Approve</button>
-   </form>
-   </div>
+   <?php
+   if($result->num_rows > 0)
+   {
+     echo '<div class="postcontainer">
+            <p class="titlelabel"><b>Title</b></p>
+            <p class="title">'.htmlentities($rows['title']).'</p>
+            <p class="descriptionlabel"><b>Description</b></p>
+            <p class="description">'.htmlentities($rows['description']).'</p>
+            <p class="resolutionlabel"><b>Resolution</b></p>
+            <p class="resolution">'.htmlentities($rows['resolution']).'</p>
+          </div>
+          <div class="backbuttondiv">
+            <form action="approve.php" method="post">
+              <input type="hidden" name="auth_id" value="'.htmlentities($_GET['auth_id']).'">
+              <button type="submit" class="nav-btn backbutton">Approve</button>
+            </form>
+            </div>';
+    }
+    else
+    {
+      echo '<div class="postcontainer">
+            <p class="error">Issue already approved or does not exist.</p>
+            </div>';
+    }
+    ?>
  </main>
  </body>
  </html>

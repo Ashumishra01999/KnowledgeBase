@@ -29,6 +29,10 @@ body {
   margin-right: auto;
   margin-left: auto; }
 
+p.error {
+  color: red;
+}
+
   .loginpage-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;

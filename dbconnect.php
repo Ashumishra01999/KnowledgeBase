@@ -25,11 +25,11 @@ error_reporting(E_ALL);
       return $query->get_result();
     }
 
-    public function addIssue($title, $description, $resolution, $user_id, $UID1, $UID2)
+    public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)
     {
       global $dblink;
-      $query = $dblink->prepare("INSERT INTO unapproved (title, description, resolution, user_id, UniqueID1, UniqueID2, flag) values(?, ?, ?, ?, ?, ?, 3)");
-      $query->bind_param("sssiii", $title, $description, $resolution, $user_id, $UID1, $UID2);
+      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id, auth_id1, auth_id2, creation_time, lastemail_time) values(?, ?, ?, ?, ?, ?, now(), now())");
+      $query->bind_param("sssiii", $title, $description, $resolution, $user_id, $auth_id1, $auth_id2);
       return array($query->execute(), $dblink->insert_id);
 
     }
@@ -47,6 +47,7 @@ error_reporting(E_ALL);
             $query .= " AND title like '%" . $keyword[$i] . "%'";
         }
       }
+      $query .= 'AND approved = 1';
       $result = $dblink->query($query);
       return $result->fetch_all(MYSQLI_ASSOC);
     }
@@ -62,42 +63,38 @@ error_reporting(E_ALL);
 
     public function getunapproved($auth_id){
     global $dblink;
-    $query = $dblink->prepare("SELECT post_id, title, description, resolution FROM unapproved WHERE UniqueID1 = ? OR UniqueID2 = ?");
+    $query = $dblink->prepare("SELECT post_id, title, description, resolution FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
     $query->bind_param("ss", $auth_id, $auth_id);
     $query->execute();
     return ($query->get_result());
   }
 
-  public function approvepost($auth_id, $mode){
+  public function approvepost($auth_id){
   global $dblink;
-  $query = $dblink->prepare("SELECT post_id, title, description, resolution, flag, UniqueID1, UniqueID2 FROM unapproved WHERE UniqueID1 = ? OR UniqueID2 = ?");
+  $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
   $query->bind_param("ss", $auth_id, $auth_id);
   $query->execute();
   $result = $query->get_result();
   if($result->num_rows > 0)
   {
     $row = $result->fetch_array(MYSQLI_ASSOC);
-    if($row['UniqueID1'] == $auth_id)
+    if($row['auth_id1'] == $auth_id)
     {
-      $target = 'UniqueID1';
+      $target = 'auth_id1';
+      $other_authid = 'auth_id2';
     }
     else
     {
-      $target = 'UniqueID2';
+      $target = 'auth_id2';
+      $other_authid = 'auth_id1';
     }
-    $newflag = $row['flag'] - 1;
-    $query = $dblink->prepare("UPDATE unapproved SET flag = ?, UniqueID1 = NULL WHERE UniqueID1 = ? OR UniqueID2 = ?");
-    $query->bind_param("iss",$newflag , $auth_id, $auth_id);
-    if($newflag == 1)
+    $query = $dblink->prepare("UPDATE posts SET $target = 0 WHERE auth_id1 = ? OR auth_id2 = ?");
+    $query->bind_param("ss", $auth_id, $auth_id);
+    $query->execute();
+    if($row[$other_authid] == 0)
     {
-      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id) values(?, ?, ?, ?)");
-      $query->bind_param("sssi", $row['title'], $row['description'], $row['resolution'], $row['user_id']);
-      if($query->execute())
-      {
-        $query = $dblink->prepare("DELETE FROM unapproved WHERE post_id = ?");
-        $query->bind_param("s", $row['post_id']);
-        $query->execute();
-      }
+      $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ".$row['post_id']);
+      $query->execute();
     }
     return 1;
   }

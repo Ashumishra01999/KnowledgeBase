@@ -52,12 +52,12 @@
              if($_SESSION['error']=='add_issue_failed')
              {
                displayerror('addissue');
-               unset($_SESSION['error']);
+               unset($_SESSION['newissue']);
              }
-             if($_SESSION['error']=='noerror')
+             if($_SESSION['newissue']=='true')
              {
                echo '<p style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><p>';
-               unset($_SESSION['error']);
+               unset($_SESSION['newissue']);
              }
            }
           ?>

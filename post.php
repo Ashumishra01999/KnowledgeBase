@@ -51,13 +51,6 @@ $post = $dbconnection->getPost($_GET['post_id']);
 
 <main class="post-main">
     <div class="postcontainer">
-      <?php
-      if(isset($_SESSION['newissue']))
-      {
-        newissue_sucess();
-        unset($_SESSION['newissue']);
-      }
-      ?>
       <p class="titlelabel"><b>Title</b></p>
       <p class="title"><?php echo htmlentities($post['title']); ?></p>
       <p class="descriptionlabel"><b>Description</b></p>
