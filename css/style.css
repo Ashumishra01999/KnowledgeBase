@@ -33,6 +33,10 @@ p.error {
   color: red;
 }
 
+p.success {
+  color: green;
+}
+
   .loginpage-wrapper {
     display: -webkit-box;
     display: -ms-flexbox;

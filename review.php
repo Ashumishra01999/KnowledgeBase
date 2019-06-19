@@ -63,6 +63,12 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
             </form>
             </div>';
     }
+    elseif(isset($_SESSION['approved'] && $_SESSION['approved'] == true))
+    {
+      echo '<div class="postcontainer">
+            <p class="success">Issue approved successfully.</p>
+            </div>';
+    }
     else
     {
       echo '<div class="postcontainer">
