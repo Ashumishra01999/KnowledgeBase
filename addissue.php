@@ -1,11 +1,11 @@
 <?php
-      require_once('util.php');
+      require_once('util.php');//require once for only accessing util until add issue is created once
       session_start();
 
       if(!isset($_SESSION['username']))
       {
            $_SESSION['error'] = 'noaccess';
-           header("Location:login.php");
+           header("Location:login.php");//access to only the logged users
       }
 ?>
 <!doctype html>
@@ -28,7 +28,7 @@
                         <form class="searchform searchform-nav" action="search.php" method="get">
                             <div class="form-group">
                                 <input type="text" name="query" class="searchbox searchbox-nav" id="username" placeholder="Search..." <?php if(isset($_GET['query'])) {echo 'value="'.$_GET['query'].'"';}?>>
-                                <button type="submit" class="btn btn-secondary searchbtn searchbtn-nav">Search</button>
+                                <button type="submit" class="btn btn-secondary searchbtn searchbtn-nav">Search</button>//search box and button field for accessing databse at the same time
                             </div>
                         </form>
                       </li>
@@ -52,28 +52,28 @@
              if($_SESSION['error']=='add_issue_failed')
              {
                displayerror('addissue');
-               unset($_SESSION['newissue']);
+               unset($_SESSION['error']);
              }
-             if($_SESSION['newissue']=='true')
+             if($_SESSION['error']=='noerror')
              {
                echo '<p style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><p>';
-               unset($_SESSION['newissue']);
+               unset($_SESSION['error']);
              }
            }
           ?>
         <form class="form-default form-create-topic" action="submitissue.php" method="post" name="addissue">
                 <div class="form-group">
                     <label for="title">Topic Title</label>
-                        <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">
+                        <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">//Form Field 1
 
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                        <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"></textarea>
+                        <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"></textarea>//Form Field 2
                 </div>
                 <div class="form-group">
                     <label for="resolution">Resolution</label>
-                        <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>
+                        <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>//Form Field 3
 
                 </div>
                 <button type="submit" class="btn btn-secondary">Submit</button>
