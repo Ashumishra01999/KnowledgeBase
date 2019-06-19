@@ -28,7 +28,7 @@
                         <form class="searchform searchform-nav" action="search.php" method="get">
                             <div class="form-group">
                                 <input type="text" name="query" class="searchbox searchbox-nav" id="username" placeholder="Search..." <?php if(isset($_GET['query'])) {echo 'value="'.$_GET['query'].'"';}?>>
-                                <button type="submit" class="btn btn-secondary searchbtn searchbtn-nav">Search</button>//search box and button field for accessing databse at the same time
+                                <button type="submit" class="btn btn-secondary searchbtn searchbtn-nav">Search</button><!--search box and button field for accessing databse at the same time-->
                             </div>
                         </form>
                       </li>
@@ -64,16 +64,16 @@
         <form class="form-default form-create-topic" action="submitissue.php" method="post" name="addissue">
                 <div class="form-group">
                     <label for="title">Topic Title</label>
-                        <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">//Form Field 1
+                        <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">
 
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                        <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"></textarea>//Form Field 2
+                        <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="resolution">Resolution</label>
-                        <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>//Form Field 3
+                        <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"></textarea>
 
                 </div>
                 <button type="submit" class="btn btn-secondary">Submit</button>
