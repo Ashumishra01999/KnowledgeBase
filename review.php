@@ -2,10 +2,18 @@
 session_start();
 require_once("dbconnect.php");
 
-$dbconnection = new dbconnector;
-$dbconnection->connect();
-$result = $dbconnection->getunapproved($_GET['auth_id']);
-$rows = $result->fetch_array(MYSQLI_ASSOC);
+if(isset($_GET['auth_id']))
+{
+  $dbconnection = new dbconnector;
+  $dbconnection->connect();
+  $result = $dbconnection->getunapproved($_GET['auth_id']);
+  $rows = $result->fetch_array(MYSQLI_ASSOC);
+  $num_rows = $result->num_rows;
+}
+else
+{
+  $num_rows = 0;
+}
 ?>
 
  <!Doctype html>
@@ -46,7 +54,14 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
 
  <main class="post-main">
    <?php
-   if($result->num_rows > 0)
+   if(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
+   {
+     echo '<div class="postcontainer">
+           <p class="success">Issue approved successfully.</p>
+           </div>';
+     unset($_SESSION['approved']);
+   }
+   elseif($num_rows > 0)
    {
      echo '<div class="postcontainer">
             <p class="titlelabel"><b>Title</b></p>
@@ -61,12 +76,6 @@ $rows = $result->fetch_array(MYSQLI_ASSOC);
               <input type="hidden" name="auth_id" value="'.htmlentities($_GET['auth_id']).'">
               <button type="submit" class="nav-btn backbutton">Approve</button>
             </form>
-            </div>';
-    }
-    elseif(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
-    {
-      echo '<div class="postcontainer">
-            <p class="success">Issue approved successfully.</p>
             </div>';
     }
     else
