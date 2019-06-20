@@ -9,14 +9,14 @@ error_reporting(E_ALL);
     function connect()
     {
       global $dblink;
-      $dblink = new mysqli("localhost","root","","kb_storage");
+      $dblink = new mysqli("localhost","root","","kb_storage");//DATABASE CONNECTION
       if($dblink == false)
       {
-        die("ERROR: Could not connect. " . mysqli_connect_error());
+        die("ERROR: Could not connect. " . mysqli_connect_error());//shows error on erroneous connection
       }
     }
 
-    public function checkLogin($username, $password)
+    public function checkLogin($username, $password)//checks username and password from the table of the databse
     {
       global $dblink;
       $query = $dblink->prepare("SELECT id, username, name FROM login_credentials WHERE username = ? AND password = ?");
@@ -25,7 +25,7 @@ error_reporting(E_ALL);
       return $query->get_result();
     }
 
-    public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)
+    public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)//SQL in php for insertion of new data in posts table
     {
       global $dblink;
       $currenttime = time();
@@ -35,7 +35,7 @@ error_reporting(E_ALL);
 
     }
 
-    public function search($query)
+    public function search($query)//accessing posts table from kb databse to give search results
     {
       global $dblink;
       $keyword = explode(" ", $query);
@@ -56,7 +56,7 @@ error_reporting(E_ALL);
     public function getPost($post_id)
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE post_id = ?");
+      $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE post_id = ?");//showing of the local results after accessing results from the posts table
       $query->bind_param("s", $post_id);
       $query->execute();
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
