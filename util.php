@@ -39,6 +39,8 @@ function newissue_mailer($title, $description, $resolution, $auth_id)
     if($auth_id[$index] != 0)
     {
       $message = generateEmail($title, $description, $resolution, $auth_id[$index]);
+      echo $message;
+      echo $to_email;
       if(!mail($to_email, $subject, $message, $headers))
       {
         $state = 0;
