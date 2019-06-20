@@ -46,5 +46,5 @@ function newissue_mailer($title, $description, $resolution, $auth_id)
     }
   }
   return $state;
-}s
+}
 ?>
