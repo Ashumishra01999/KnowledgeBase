@@ -36,14 +36,15 @@ function newissue_mailer($title, $description, $resolution, $auth_id)
   $state = 1;
   foreach($to_emails as $index => $to_email)
   {
-    $message = generateEmail($title, $description, $resolution, $auth_id[$index]);
-    if(!mail($to_email, $subject, $message, $headers))
+    if($auth_id[$index] != 0)
     {
-      $state = 0;
+      $message = generateEmail($title, $description, $resolution, $auth_id[$index]);
+      if(!mail($to_email, $subject, $message, $headers))
+      {
+        $state = 0;
+      }
     }
   }
   return $state;
-}
-
-
+}s
 ?>
