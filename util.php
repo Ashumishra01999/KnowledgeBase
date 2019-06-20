@@ -1,5 +1,5 @@
 <?php
-require_once('newissueEmail.php');
+require_once('issueAlert.php');
 function newissue_sucess()
 {
   echo '<p style="color:green;"><b>New Issue Created Successfully</b><p>';
@@ -21,11 +21,18 @@ function displayerror($source)
   }
 }
 
-function newissue_mailer($title, $description, $resolution, $auth_id)
+function newissue_mailer($title, $description, $resolution, $auth_id, $isReminder = false)
 {
   $from = "saurabhyadav9535@gmail.com";
   $to_emails = array("saurabhyadav338@gmail.com","yf.yousuf95@gmail.com");
-  $subject = "New Issue Created";
+  if($isReminder)
+  {
+    $subject = "Issue Approval Reminder";
+  }
+  else
+  {
+    $subject = "New Issue Created";
+  }
   $headers  = 'MIME-Version: 1.0' . "\r\n";
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
@@ -38,9 +45,7 @@ function newissue_mailer($title, $description, $resolution, $auth_id)
   {
     if($auth_id[$index] != 0)
     {
-      $message = generateEmail($title, $description, $resolution, $auth_id[$index]);
-      echo $message;
-      echo $to_email;
+      $message = generateEmail($title, $description, $resolution, $auth_id[$index], $isReminder);
       if(!mail($to_email, $subject, $message, $headers))
       {
         $state = 0;

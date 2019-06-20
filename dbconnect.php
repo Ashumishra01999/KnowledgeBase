@@ -28,7 +28,8 @@ error_reporting(E_ALL);
     public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)
     {
       global $dblink;
-      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id, auth_id1, auth_id2, creation_time, lastemail_time) values(?, ?, ?, ?, ?, ?, now(), now())");
+      $currenttime = time();
+      $query = $dblink->prepare("INSERT INTO posts (title, description, resolution, user_id, auth_id1, auth_id2, creation_time, lastemail_time) values(?, ?, ?, ?, ?, ?, now(), $currenttime)");
       $query->bind_param("sssiii", $title, $description, $resolution, $user_id, $auth_id1, $auth_id2);
       return array($query->execute(), $dblink->insert_id);
 
