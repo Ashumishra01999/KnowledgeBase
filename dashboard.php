@@ -13,7 +13,7 @@ if(!isset($_SESSION['username']))
     <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/png" href="images\favicon.png">
+    <link rel="icon" type="image/png" href="images\favicon.png"><!--Favicon image at the top with title of browser tab-->
 </head>
 
 <body>
