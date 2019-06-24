@@ -23,6 +23,12 @@ if(!isset($_SESSION['username']))
     </div>
             <nav>
                 <ul class="nav-list">
+                  <?php
+                    if($_SESSION['role_type'] == 'superadmin')
+                    {
+                      echo '<li><a class = "nav-darklnk" href="superadmin.php"><button type="submit" class="nav-btn">Admin Dashboard</a></li>';
+                    }
+                    ?>
                     <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
                     <li>
                       <div class="dropdown">
