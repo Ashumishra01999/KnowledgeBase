@@ -23,6 +23,7 @@ $dbconnection->connect();
   <title>Super-Admin Dashboard - Knowledge Center</title>
   <link rel="stylesheet" href="css\style.css">
   <link rel="icon" type="image/png" href="images/favicon.png">
+  <script src="js/javascript.js"></script>
 </head>
 <body>
   <header>
@@ -54,15 +55,26 @@ $dbconnection->connect();
 
   <main class="dash-main">
     <div class="dash-container">
-      <div class="inner-nav">
-          <ul class="nav-tabs" role="tablist">
-              <li class="nav-item">
-                  <a class="nav-link show active" data-toggle="tab" href="#tab-01" role="tab"><span>Issues</span></a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#tab-02" role="tab"><span>User Management</span></a>
-              </li>
-          </ul>
-      </div>
+      <ul class="tabs">
+
+        <li class="tab">
+          <input type="radio" name="tabs" checked="checked" id="tab1" />
+          <label for="tab1">Unapproved Posts</label>
+          <div id="tab-content1" class="content">Text1</div>
+        </li>
+
+        <li class="tab">
+          <input type="radio" name="tabs" id="tab2" />
+          <label for="tab2">Approved Posts</label>
+          <div id="tab-content2" class="content">Text2</div>
+        </li>
+
+        <li class="tab">
+          <input type="radio" name="tabs" id="tab3" />
+          <label for="tab3">User Management</label>
+          <div id="tab-content3" class="content">Text3</div>
+        </li>
+
+      </ul>
     </div>
   </main>
