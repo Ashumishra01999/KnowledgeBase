@@ -56,7 +56,7 @@ error_reporting(E_ALL);
     public function getPost($post_id)
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE post_id = ?");//showing of the local results after accessing results from the posts table
+      $query = $dblink->prepare("SELECT post_id ,title, description, resolution FROM posts WHERE post_id = ?");//showing of the local results after accessing results from the posts table
       $query->bind_param("s", $post_id);
       $query->execute();
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
@@ -111,4 +111,23 @@ error_reporting(E_ALL);
     return 0;
   }
   }
+
+  public function getallPost()
+  {
+    global $dblink;
+    $query = $dblink->prepare("SELECT post_id ,title, description, resolution FROM posts WHERE approved = 1");
+    // $query->bind_param("s", $post_id);
+    $query->execute();
+    return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
+  }
+
+  public function deletePost($post_id)
+  {
+    global $dblink;
+    $query = $dblink->prepare("DELETE FROM posts WHERE post_id = ?");
+    $query->bind_param("s", $post_id);
+    $query->execute();
+    // return;
+  }
+
 }
