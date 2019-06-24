@@ -70,13 +70,6 @@ error_reporting(E_ALL);
     return ($query->get_result());
   }
 
-  public function getallunapproved(){
-  global $dblink;
-  $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2, lastemail_time FROM posts");
-  $query->execute();
-  return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
-}
-
   public function approvepost($auth_id){
   global $dblink;
   $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
@@ -112,11 +105,10 @@ error_reporting(E_ALL);
   }
   }
 
-  public function getallPost()
+  public function getallPosts()
   {
     global $dblink;
-    $query = $dblink->prepare("SELECT post_id ,title, description, resolution FROM posts WHERE approved = 1");
-    // $query->bind_param("s", $post_id);
+    $query = $dblink->prepare("SELECT post_id ,title, description, resolution, approved FROM posts");
     $query->execute();
     return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
   }

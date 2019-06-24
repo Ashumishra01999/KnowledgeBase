@@ -56,7 +56,7 @@
              }
              if($_SESSION['error']=='noerror')
              {
-               echo '<p style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><p>';
+               echo '<div style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><div>';
                unset($_SESSION['error']);
              }
            }

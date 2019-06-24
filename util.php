@@ -2,22 +2,22 @@
 require_once('issueAlert.php');
 function newissue_sucess()
 {
-  echo '<p style="color:green;"><b>New Issue Created Successfully</b><p>';
+  echo '<div style="color:green;"><b>New Issue Created Successfully</b><div>';
 }
 
 function displayerror($source)
 {
   if($source == 'addissue')
   {
-    echo '<p style="color:red;"><b>Unable to Add New Issue. Please Try Again.</b><p>';
+    echo '<div style="color:red;"><b>Unable to Add New Issue. Please Try Again.</b><div>';
   }
   elseif($source == 'login')
   {
-    echo '<p style="color:red;"><b>Incorrect Username/Password.</b><p>';
+    echo '<div style="color:red;"><b>Incorrect Username/Password.</b><div>';
   }
   elseif($source == 'noaccess')
   {
-    echo '<p style="color:red;"><b>Please Login First.</b><p>';
+    echo '<div style="color:red;"><b>Please Login First.</b><div>';
   }
 }
 
