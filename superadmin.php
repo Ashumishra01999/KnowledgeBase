@@ -72,6 +72,7 @@ $allposts = $dbconnection->getallPosts();
               ?>
               <table class="postlist">
                 <tr>
+                  <th class="text-center">User</th>
                   <th class="text-center">Issue Name</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -83,6 +84,8 @@ $allposts = $dbconnection->getallPosts();
                   {
                     $found++;
                     echo "<tr><td class='text-left'>";
+                    echo htmlentities($_SESSION['name']);
+                    echo "</td><td class='text-left'>";
                     echo htmlentities($post['title']);
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
@@ -110,6 +113,7 @@ $allposts = $dbconnection->getallPosts();
             <form method = "GET" action='delete.php'>
               <table class="postlist">
                 <tr>
+                  <th class="text-center">User</th>
                   <th class="text-center">Issue Name</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -121,6 +125,8 @@ $allposts = $dbconnection->getallPosts();
                   {
                     $found++;
                     echo "<tr><td class='text-left'>";
+                    echo htmlentities($_SESSION['name']);
+                    echo "</td><td class='text-left'>";
                     echo htmlentities($post['title']);
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
