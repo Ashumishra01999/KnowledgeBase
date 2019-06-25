@@ -16,6 +16,7 @@ if($_SESSION['role_type'] != 'superadmin')
 $dbconnection = new dbconnector;
 $dbconnection->connect();
 $allposts = $dbconnection->getallPosts();
+$userlist = $dbconnection->getUsers();
 ?>
 <!Doctype html>
 <html>
@@ -79,22 +80,17 @@ $allposts = $dbconnection->getallPosts();
                 </tr>
                 <?php
                 $found = 0;
-                foreach($allposts as $post){
-                  if($post['approved'] == 1)
-                  {
+                foreach($userlist as $user){
                     $found++;
                     echo "<tr><td class='text-left'>";
-                    echo htmlentities($_SESSION['name']);
+                    echo htmlentities($user['id']);
                     echo "</td><td class='text-left'>";
-                    echo htmlentities($post['title']);
+                    echo htmlentities($user['name']);
                     echo("</td><td class='text-left'>");
-                    echo(htmlentities($post['description']));
+                    echo(htmlentities($user['username']));
                     echo("</td><td class='text-left'>");
-                      echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo '  ';
-                    echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
+                    echo(htmlentities($user['role_type']));
                     echo("</td></tr>\n");
-                  }
                 }
                 if(!$found)
                 {
@@ -150,7 +146,40 @@ $allposts = $dbconnection->getallPosts();
         <li class="tab">
           <input type="radio" name="tabs" id="tab3" />
           <label for="tab3">User Management</label>
-          <div id="tab-content3" class="content">Text3</div>
+          <div id="tab-content3" class="content">
+            <table class="postlist">
+              <tr>
+                <th class="text-center">User ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Username</th>
+                <th class="text-center">Role</th>
+              </tr>
+              <?php
+              $found = 0;
+              foreach($allposts as $post){
+                if($post['approved'] == 0)
+                {
+                  $found++;
+                  echo "<tr><td class='text-left'>";
+                  echo htmlentities($_SESSION['name']);
+                  echo "</td><td class='text-left'>";
+                  echo htmlentities($post['title']);
+                  echo("</td><td class='text-left'>");
+                  echo(htmlentities($post['description']));
+                  echo("</td><td class='text-left'>");
+                  echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
+                  echo '  ';
+                  echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
+                  echo("</td></tr>\n");
+                }
+              }
+              if(!$found)
+              {
+                echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
+              }
+              ?>
+            </table>
+          </div>
         </li>
 
       </ul>

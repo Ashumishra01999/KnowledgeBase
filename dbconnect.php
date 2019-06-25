@@ -129,9 +129,10 @@ error_reporting(E_ALL);
   $query->execute();
 }
 
-public function getallunapproved(){
+public function getUsers()
+{
   global $dblink;
-  $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2, lastemail_time FROM posts");
+  $query = $dblink->prepare("SELECT id, name, username, role_type FROM login_credentials");
   $query->execute();
   return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
 }
