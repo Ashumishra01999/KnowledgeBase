@@ -89,7 +89,7 @@ $userlist = $dbconnection->getUsers();
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo '|';
+                    echo ' ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
                   }
@@ -127,7 +127,7 @@ $userlist = $dbconnection->getUsers();
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo '|';
+                    echo ' ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
                   }
