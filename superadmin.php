@@ -88,7 +88,7 @@ $userlist = $dbconnection->getUsers();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('Edit');
+                    echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
                     echo '|';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
