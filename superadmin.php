@@ -73,7 +73,7 @@ $userlist = $dbconnection->getUsers();
               ?>
               <table class="postlist">
                 <tr>
-                  <th class="text-center">Issue Name</th>
+                  <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
                 </tr>
@@ -111,7 +111,7 @@ $userlist = $dbconnection->getUsers();
             <form method = "GET" action='delete.php'>
               <table class="postlist">
                 <tr>
-                  <th class="text-center">Issue Name</th>
+                  <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
                 </tr>
