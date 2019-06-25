@@ -90,8 +90,8 @@ $allposts = $dbconnection->getallPosts();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('Edit');
-                    echo '|';
+                      echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
+                    echo '  ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
                   }
@@ -132,7 +132,7 @@ $allposts = $dbconnection->getallPosts();
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo '|';
+                    echo '  ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
                   }
