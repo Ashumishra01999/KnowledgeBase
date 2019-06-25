@@ -119,7 +119,21 @@ error_reporting(E_ALL);
     $query = $dblink->prepare("DELETE FROM posts WHERE post_id = ?");
     $query->bind_param("s", $post_id);
     $query->execute();
-    // return;
   }
+
+  public function editPost($title, $description, $resolution, $post_id)
+{
+  global $dblink;
+  $query = $dblink->prepare("UPDATE posts SET title = ?, description = ?, resolution = ? WHERE post_id = ?");
+  $query->bind_param("ssss", $title,$description,$resolution,$post_id);
+  $query->execute();
+}
+
+public function getallunapproved(){
+  global $dblink;
+  $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2, lastemail_time FROM posts");
+  $query->execute();
+  return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
+}
 
 }

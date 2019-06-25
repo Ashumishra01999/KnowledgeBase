@@ -69,7 +69,7 @@ for($i = 0 ; $i < $num_matches ; $i++){
   echo("</td><td>");
   echo(htmlentities($row['description']));
   echo("</td><td>");
-  echo('Edit');
+  echo('<a href="editpost.php?post_id='.$row['post_id'].'">Edit</a>');
   echo '|';
   echo('<a href="delete.php?post_id='.$row['post_id'].'">Delete</a>');
   echo("</td></tr>\n");

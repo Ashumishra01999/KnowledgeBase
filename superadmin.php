@@ -65,12 +65,10 @@ $allposts = $dbconnection->getallPosts();
               <?php
               if(isset($_SESSION['success']))
               {
-                if($_SESSION['success'] == 'RecordDeleted')
-                {
-                  echo '<div class = message><b>Deletion Successful</b><div>';
+                // if($_SESSION['success'] == 'RecordDeleted')
+                  echo '<div class = message><b>'.$_SESSION['success'].'</b><div>';
                   unset($_SESSION['success']);
                 }
-              }
               ?>
               <table class="postlist">
                 <tr>
@@ -127,7 +125,7 @@ $allposts = $dbconnection->getallPosts();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('Edit');
+                    echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
                     echo '|';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
