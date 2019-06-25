@@ -73,24 +73,26 @@ $userlist = $dbconnection->getUsers();
               ?>
               <table class="postlist">
                 <tr>
-                  <th class="text-center">User</th>
                   <th class="text-center">Issue Name</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
                 </tr>
                 <?php
                 $found = 0;
-                foreach($userlist as $user){
+                foreach($allposts as $post){
+                  if($post['approved'] == 1)
+                  {
                     $found++;
                     echo "<tr><td class='text-left'>";
-                    echo htmlentities($user['id']);
-                    echo "</td><td class='text-left'>";
-                    echo htmlentities($user['name']);
+                    echo htmlentities($post['title']);
                     echo("</td><td class='text-left'>");
-                    echo(htmlentities($user['username']));
+                    echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo(htmlentities($user['role_type']));
+                    echo('Edit');
+                    echo '|';
+                    echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
+                  }
                 }
                 if(!$found)
                 {
@@ -109,7 +111,6 @@ $userlist = $dbconnection->getUsers();
             <form method = "GET" action='delete.php'>
               <table class="postlist">
                 <tr>
-                  <th class="text-center">User</th>
                   <th class="text-center">Issue Name</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -121,14 +122,12 @@ $userlist = $dbconnection->getUsers();
                   {
                     $found++;
                     echo "<tr><td class='text-left'>";
-                    echo htmlentities($_SESSION['name']);
-                    echo "</td><td class='text-left'>";
                     echo htmlentities($post['title']);
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo '  ';
+                    echo '|';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
                     echo("</td></tr>\n");
                   }
@@ -147,38 +146,38 @@ $userlist = $dbconnection->getUsers();
           <input type="radio" name="tabs" id="tab3" />
           <label for="tab3">User Management</label>
           <div id="tab-content3" class="content">
-            <table class="postlist">
-              <tr>
-                <th class="text-center">User ID</th>
-                <th class="text-center">Name</th>
-                <th class="text-center">Username</th>
-                <th class="text-center">Role</th>
-              </tr>
-              <?php
-              $found = 0;
-              foreach($allposts as $post){
-                if($post['approved'] == 0)
-                {
-                  $found++;
-                  echo "<tr><td class='text-left'>";
-                  echo htmlentities($_SESSION['name']);
-                  echo "</td><td class='text-left'>";
-                  echo htmlentities($post['title']);
-                  echo("</td><td class='text-left'>");
-                  echo(htmlentities($post['description']));
-                  echo("</td><td class='text-left'>");
-                  echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                  echo '  ';
-                  echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
-                  echo("</td></tr>\n");
+            <form method = "GET" action='delete.php'>
+              <table class="postlist">
+                <tr>
+                  <th class="text-center">User ID</th>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Username</th>
+                  <th class="text-center">Role</th>
+                </tr>
+                <?php
+                $found = 0;
+                foreach($userlist as $user){
+                  if($post['approved'] == 0)
+                  {
+                    $found++;
+                    echo "<tr><td class='text-left'>";
+                    echo htmlentities($user['id']);
+                    echo "</td><td class='text-left'>";
+                    echo htmlentities($user['name']);
+                    echo("</td><td class='text-left'>");
+                    echo(htmlentities($user['username']));
+                    echo("</td><td class='text-left'>");
+                    echo(htmlentities($user['role_type']));
+                    echo("</td></tr>");
+                  }
                 }
-              }
-              if(!$found)
-              {
-                echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
-              }
-              ?>
-            </table>
+                if(!$found)
+                {
+                  echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
+                }
+                ?>
+              </table>
+            </form>
           </div>
         </li>
 
