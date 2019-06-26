@@ -51,7 +51,13 @@ $post = $dbconnection->getPost($_GET['post_id']);
 
 <main class="post-main">
     <div class="postcontainer">
+
       <?php
+      if(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
+      {
+        echo '<p class="success">Issue approved successfully.</p>';
+        unset($_SESSION['approved']);
+      }
         if($post['approved'] == 1 || $_SESSION['role_type'] == 'superadmin')
         {
       ?>
@@ -69,12 +75,32 @@ $post = $dbconnection->getPost($_GET['post_id']);
         }
       ?>
     </div>
-  <div class="postpanel">
-  <a class="btn2link" href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><button type="submit" class="nav-btn btn2">Back</button></a>
 <?php
   if($_SESSION['role_type'] == 'superadmin')
   {
-    echo '<a class="btn2link" href="editpost.php?post_id='.$post['post_id'].'"><button type="submit" class="nav-btn btn2">Edit</button></a>';
+    echo '<div class="postpanel">
+          <a class="btn2link" href="superadmin.php" ><button type="submit" class="nav-btn btn2">Admin Dashboard</button></a>';
+    if($post['approved'] == 0)
+    {
+      echo '<form action="approve.php" method="post">
+            <input type="hidden" name="post_id" value="'.htmlentities($_GET['post_id']).'">
+            <button type="submit" class="nav-btn btn2">Approve</button>
+            </form>';
+    }
+    echo '<a class="btn2link" href="editpost.php?post_id='.$post['post_id'].'"><button type="submit" class="nav-btn btn2 btn2">Edit</button></a>';
+  }
+  else
+  {
+    if(isset($_SERVER['HTTP_REFERER']))
+    {
+      $backlink = htmlspecialchars($_SERVER['HTTP_REFERER']);
+    }
+    else
+    {
+      $backlink = htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']);
+    }
+    echo '<div class="postpanel">
+          <a class="btn2link" href='.$backlink.'><button type="submit" class="nav-btn btn2">Back</button></a>';
   }
 ?>
 </div>

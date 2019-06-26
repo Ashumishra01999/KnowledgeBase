@@ -134,7 +134,7 @@ $userlist = $dbconnection->getUsers();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>');
+                    echo('<a href="post.php?post_id='.$post['post_id'].'">Review</a>');
                     echo ' ';
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
                     echo ' ';

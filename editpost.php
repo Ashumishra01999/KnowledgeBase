@@ -16,14 +16,12 @@ if( isset($_POST['title']) && isset($_POST['description']) && isset($_POST['reso
   $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
   $_SESSION['success'] = 'Record Updated';
   header( 'Location: superadmin.php' ) ;
-  return;
 }
 
 if(! isset($_GET['post_id']))
 {
-  $_SESSION['error'] = "Missing profile_id";
+  $_SESSION['error'] = "Missing Post ID";
   header('Location: superadmin.php');
-  return;
 }
 
 

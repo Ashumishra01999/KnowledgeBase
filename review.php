@@ -71,10 +71,10 @@ else
             <p class="resolutionlabel"><b>Resolution</b></p>
             <p class="resolution">'.htmlentities($rows['resolution']).'</p>
           </div>
-          <div class="backbuttondiv">
+          <div class="postpanel">
             <form action="approve.php" method="post">
               <input type="hidden" name="auth_id" value="'.htmlentities($_GET['auth_id']).'">
-              <button type="submit" class="nav-btn backbutton">Approve</button>
+              <button type="submit" class="nav-btn btn2">Approve</button>
             </form>
             </div>';
     }

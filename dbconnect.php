@@ -70,10 +70,30 @@ error_reporting(E_ALL);
     return ($query->get_result());
   }
 
-  public function approvepost($auth_id){
+  public function approvepost($id, $is_superadmin){
   global $dblink;
-  $query = $dblink->prepare("SELECT post_id, title, description, resolution, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
-  $query->bind_param("ss", $auth_id, $auth_id);
+  if($is_superadmin)
+  {
+    $query = $dblink->prepare("SELECT approved FROM posts WHERE post_id = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    $result = $query->get_result();
+    if($result->num_rows > 0)
+    {
+      $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ?");
+      $query->bind_param("i", $id);
+      $query->execute();
+      return 1;
+    }
+    else
+    {
+      return 0;
+    }
+  }
+  else
+  {
+  $query = $dblink->prepare("SELECT post_id, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
+  $query->bind_param("ii", $id, $id);
   $query->execute();
   $result = $query->get_result();
   if($result->num_rows > 0)
@@ -102,6 +122,7 @@ error_reporting(E_ALL);
   else
   {
     return 0;
+  }
   }
   }
 

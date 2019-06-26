@@ -26,10 +26,10 @@ if(!isset($_SESSION['username']))
                   <?php
                     if($_SESSION['role_type'] == 'superadmin')
                     {
-                      echo '<li><a class = "nav-darklnk" href="superadmin.php"><button type="submit" class="nav-btn">Admin Dashboard</a></li>';
+                      echo '<li><a class = "nav-darklnk" href="superadmin.php"><button type="submit" class="nav-btn">Admin Dashboard</button></a></li>';
                     }
                     ?>
-                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
+                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</button></a></li>
                     <li>
                       <div class="dropdown">
                         <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
