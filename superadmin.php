@@ -73,6 +73,7 @@ $userlist = $dbconnection->getUsers();
               ?>
               <table class="postlist">
                 <tr>
+                  <th class="text-center">User</th>
                   <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -84,10 +85,14 @@ $userlist = $dbconnection->getUsers();
                   {
                     $found++;
                     echo "<tr><td class='text-left'>";
-                    echo htmlentities($post['title']);
+                    echo htmlentities($post['name']);
+                    echo("</td><td class='text-left'>");
+                    echo(htmlentities($post['title']));
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
+                    echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>');
+                    echo ' ';
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
                     echo ' ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
@@ -96,7 +101,7 @@ $userlist = $dbconnection->getUsers();
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='4'>No Issues Found</td></tr>";
                 }
                 ?>
               </table>
@@ -111,6 +116,7 @@ $userlist = $dbconnection->getUsers();
             <form method = "GET" action='delete.php'>
               <table class="postlist">
                 <tr>
+                  <th class="text-center">User</th>
                   <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -122,10 +128,14 @@ $userlist = $dbconnection->getUsers();
                   {
                     $found++;
                     echo "<tr><td class='text-left'>";
-                    echo htmlentities($post['title']);
+                    echo htmlentities($post['name']);
+                    echo("</td><td class='text-left'>");
+                    echo(htmlentities($post['title']));
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
+                    echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>');
+                    echo ' ';
                     echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
                     echo ' ';
                     echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
@@ -134,7 +144,7 @@ $userlist = $dbconnection->getUsers();
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='4'>No Issues Found</td></tr>";
                 }
                 ?>
               </table>

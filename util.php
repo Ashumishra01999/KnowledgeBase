@@ -5,7 +5,7 @@ function newissue_sucess()
   echo '<div style="color:green;"><b>New Issue Created Successfully</b><div>';
 }
 
-function displayerror($source)
+function displayerror($message, $source = 'undefined')
 {
   if($source == 'addissue')
   {
@@ -18,6 +18,10 @@ function displayerror($source)
   elseif($source == 'noaccess')
   {
     echo '<div style="color:red;"><b>Please Login First.</b><div>';
+  }
+  else
+  {
+    echo '<div style="color:red;"><b>'.$message.'</b><div>';
   }
 }
 

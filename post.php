@@ -51,15 +51,32 @@ $post = $dbconnection->getPost($_GET['post_id']);
 
 <main class="post-main">
     <div class="postcontainer">
+      <?php
+        if($post['approved'] == 1 || $_SESSION['role_type'] == 'superadmin')
+        {
+      ?>
       <p class="titlelabel"><b>Title</b></p>
       <p class="title"><?php echo htmlentities($post['title']); ?></p>
       <p class="descriptionlabel"><b>Description</b></p>
       <p class="description"><?php echo htmlentities($post['description']); ?></p>
       <p class="resolutionlabel"><b>Resolution</b></p>
       <p class="resolution"><?php echo htmlentities($post['resolution']); ?></p>
+      <?php
+        }
+        else
+        {
+          displayerror('Unauthorised Access');
+        }
+      ?>
     </div>
-  <div class="backbuttondiv">
-  <a class="back-btn" href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><button type="submit" class="nav-btn backbutton">Back</button></a>
+  <div class="postpanel">
+  <a class="btn2link" href=<?php if(isset($_SERVER['HTTP_REFERER'])) { echo htmlspecialchars($_SERVER['HTTP_REFERER']); } else { echo htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']); } ?>><button type="submit" class="nav-btn btn2">Back</button></a>
+<?php
+  if($_SESSION['role_type'] == 'superadmin')
+  {
+    echo '<a class="btn2link" href="editpost.php?post_id='.$post['post_id'].'"><button type="submit" class="nav-btn btn2">Edit</button></a>';
+  }
+?>
 </div>
 </main>
 </body>
