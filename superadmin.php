@@ -91,11 +91,20 @@ $userlist = $dbconnection->getUsers();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>');
-                    echo ' ';
-                    echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo ' ';
-                    echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
+                    ?>
+                    <label class="dropdown">
+                        <div class="dd-button">
+                          Action
+                        </div>
+                        <input type="checkbox" class="dd-input" id="test">
+                        <ul class="dd-menu">
+                          <li><?php echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>'); ?> </li>
+                          <li><?php echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>'); ?> </li>
+                          <li><?php echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>'); ?> </li>
+
+                        </ul>
+                      </label>
+                    <?php
                     echo("</td></tr>\n");
                   }
                 }
@@ -134,11 +143,20 @@ $userlist = $dbconnection->getUsers();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['description']));
                     echo("</td><td class='text-left'>");
-                    echo('<a href="post.php?post_id='.$post['post_id'].'">Review</a>');
-                    echo ' ';
-                    echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>');
-                    echo ' ';
-                    echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>');
+                    ?>
+                    <label class="dropdown">
+                        <div class="dd-button">
+                          Action
+                        </div>
+                        <input type="checkbox" class="dd-input" id="test">
+                        <ul class="dd-menu">
+                          <li><?php echo('<a href="post.php?post_id='.$post['post_id'].'">Review</a>'); ?> </li>
+                          <li><?php echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>'); ?> </li>
+                          <li><?php echo('<a href="delete.php?post_id='.$post['post_id'].'">Delete</a>'); ?> </li>
+
+                        </ul>
+                      </label>
+                    <?php
                     echo("</td></tr>\n");
                   }
                 }
