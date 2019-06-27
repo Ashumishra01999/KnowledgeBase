@@ -1,4 +1,9 @@
 <?php
+/* generateEmail() returns the HTML for issue alert emails with issue specific Details
+ * @parameter - title, description & resolution of the issue
+ *              auth_id:- specific to the admin being notified
+ *              $isReminder:- 0-Generates email for a "new issue, 1-Generates email for "reminder alerts"
+*/
 function generateEmail($title, $description, $resolution, $auth_id, $isReminder)
 {
 $message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

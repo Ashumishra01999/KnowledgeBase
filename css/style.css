@@ -32,12 +32,14 @@ body {
   margin-left: auto;
 }
 
-p.error {
+.errormessage {
   color: red;
+  font-weight: bold;
 }
 
-p.success {
+.successmessage {
   color: green;
+  font-weight: bold;
 }
 
 .loginpage-wrapper {
@@ -552,7 +554,8 @@ div.bottom-nav {
   display: none;
   overflow: hidden;
   width: 100%;
-  padding: 25px;
+  padding: 25px 25px 60px 25px;
+  margin-bottom: 30px;
   position: absolute;
   top: 50px;
   left: 0;
@@ -699,8 +702,6 @@ div.bottom-nav {
   text-align: right;
 }
 
-
-
 /* Superadmin Panel Dropdown Button */
 body {
   /* color: #000000; */
@@ -719,7 +720,6 @@ a:hover {
 }
 
 /* Dropdown */
-
 .dropdown {
   display: inline-block;
   position: relative;
@@ -734,6 +734,7 @@ a:hover {
   background-color: #ffffff;
   cursor: pointer;
   white-space: nowrap;
+  z-index: 0;
 }
 
 .dd-button:after {
@@ -750,9 +751,9 @@ a:hover {
 }
 
 .dd-button:hover {
-  background-color: #eeeeee;]
+  background-color: #eeeeee;
+  ]
 }
-
 
 .dd-input {
   display: none;
@@ -765,16 +766,17 @@ a:hover {
   border-radius: 4px;
   padding: 0;
   margin: 2px 0 0 0;
-  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   list-style-type: none;
+  z-index: 1;
 }
 
-.dd-input + .dd-menu {
+.dd-input+.dd-menu {
   display: none;
 }
 
-.dd-input:checked + .dd-menu {
+.dd-input:checked+.dd-menu {
   display: block;
 }
 
@@ -795,7 +797,7 @@ a:hover {
   padding: 10px 20px;
 }
 
-.dd-menu li.divider{
+.dd-menu li.divider {
   padding: 0;
   /* border-bottom: 1px solid #cccccc; */
 }

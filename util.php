@@ -1,17 +1,14 @@
 <?php
+/* dependency for newissue_mailer(), contains email alert template.
+ * -Contains the generateEmail() function
+ */
 require_once('issueAlert.php');
-function newissue_sucess()
-{
-  echo '<div style="color:green;"><b>New Issue Created Successfully</b><div>';
-}
 
+
+//Function to display error messages
 function displayerror($message, $source = 'undefined')
 {
-  if($source == 'addissue')
-  {
-    echo '<div style="color:red;"><b>Unable to Add New Issue. Please Try Again.</b><div>';
-  }
-  elseif($source == 'login')
+  if($source == 'login')
   {
     echo '<div style="color:red;"><b>Incorrect Username/Password.</b><div>';
   }
@@ -25,9 +22,12 @@ function displayerror($message, $source = 'undefined')
   }
 }
 
+/*Function to send out new issue and approval reminder email alerts
+  @returns - 0 on failure and 1 on success*/
 function newissue_mailer($title, $description, $resolution, $auth_id, $isReminder = false)
 {
   $from = "saurabhyadav9535@gmail.com";
+  //Array containing the list of email addresses that're to be notified.
   $to_emails = array("saurabhyadav338@gmail.com","yf.yousuf95@gmail.com");
   if($isReminder)
   {
@@ -49,6 +49,7 @@ function newissue_mailer($title, $description, $resolution, $auth_id, $isReminde
   {
     if($auth_id[$index] != 0)
     {
+      //generateEmail returns the content of the email in HTML format.
       $message = generateEmail($title, $description, $resolution, $auth_id[$index], $isReminder);
       if(!mail($to_email, $subject, $message, $headers))
       {

@@ -1,11 +1,10 @@
 <?php
-      require_once('util.php');//require once for only accessing util until add issue is created once
       session_start();
 
       if(!isset($_SESSION['username']))
       {
            $_SESSION['error'] = 'noaccess';
-           header("Location:login.php");//access to only the logged users
+           header("Location:login.php");
       }
 ?>
 <!doctype html>
@@ -22,6 +21,7 @@
         <div class="logo">
             <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
         </div>
+                <!-- Navigation Bar, also contains a search box -->
                 <nav class="searchres-bar">
                     <ul class="nav-list">
                       <li>
@@ -34,6 +34,7 @@
                       </li>
                         <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
                         <li>
+                          <!-- Displays the name of the logged in user from session and presnets relevant account options in a dropdown-->
                           <div class="dropdown">
                             <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
                             <div class="dropdown-content">
@@ -47,25 +48,26 @@
       <main>
         <div class="addnew-main">
           <?php
+          // Display relevant success/error message after a user submit a new issue.
            if(isset($_SESSION['error']))
            {
              if($_SESSION['error']=='add_issue_failed')
              {
-               displayerror('addissue');
+               echo '<div class = "errormessage">Unable to Add New Issue. Please Try Again.<div>';
                unset($_SESSION['error']);
              }
              if($_SESSION['error']=='noerror')
              {
-               echo '<div style="color:green;"><b>Issue has been Submitted Successfully for Moderation.</b><div>';
+               echo '<div class = "successmessage">Issue has been Submitted Successfully for Moderation.<div>';
                unset($_SESSION['error']);
              }
            }
           ?>
+        <!-- Form to accept details of new issue -->
         <form class="form-default form-create-topic" action="submitissue.php" method="post" name="addissue">
                 <div class="form-group">
                     <label for="title">Topic Title</label>
                         <input type="text" name="title" class="form-control issue-title" id="title" placeholder="Title of your Issue">
-
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
@@ -80,6 +82,7 @@
             </form>
 
     <script>
+          //Add issue form validation using jquery.
           $(function() {
             // Initialize form validation on the registration form.
             // It has the name attribute "registration"
@@ -116,8 +119,6 @@
             minlength: "<br>The resolution must be at least 10 characters long"
           },
         },
-        // Make sure the form is submitted to the destination defined
-        // in the "action" attribute of the form when valid
         submitHandler: function(form) {
           form.submit();
         }
