@@ -16,6 +16,8 @@ error_reporting(E_ALL);
       }
     }
 
+// Function to verify user credentials
+
     public function checkLogin($username, $password)//checks username and password from the table of the databse
     {
       global $dblink;
@@ -24,6 +26,8 @@ error_reporting(E_ALL);
       $query->execute();
       return $query->get_result();
     }
+
+// Function to add a new issue
 
     public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)//SQL in php for insertion of new data in posts table
     {
@@ -34,6 +38,8 @@ error_reporting(E_ALL);
       return array($query->execute(), $dblink->insert_id);
 
     }
+
+// Function to search approved posts accessible to admins
 
     public function search($query)//accessing posts table from kb databse to give search results
     {
@@ -53,6 +59,8 @@ error_reporting(E_ALL);
       return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+// Function to get an approved post
+
     public function getPost($post_id)
     {
       global $dblink;
@@ -62,6 +70,8 @@ error_reporting(E_ALL);
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
     }
 
+// Function to get an unapproved post
+
     public function getunapproved($auth_id){
     global $dblink;
     $query = $dblink->prepare("SELECT post_id, title, description, resolution FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
@@ -69,6 +79,8 @@ error_reporting(E_ALL);
     $query->execute();
     return ($query->get_result());
   }
+
+// Funtion for approving a post by an admin
 
   public function approvepost($id, $is_superadmin){
   global $dblink;
@@ -126,6 +138,8 @@ error_reporting(E_ALL);
   }
   }
 
+// Function to get all posts (approved and unapproved)
+
   public function getallPosts()
   {
     global $dblink;
@@ -133,6 +147,8 @@ error_reporting(E_ALL);
     $query->execute();
     return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
   }
+
+// Function to delete a post in superadmin Panel
 
   public function deletePost($post_id)
   {
@@ -142,6 +158,8 @@ error_reporting(E_ALL);
     $query->execute();
   }
 
+// Function to edit a post in superadmin Panel
+
   public function editPost($title, $description, $resolution, $post_id)
 {
   global $dblink;
@@ -149,6 +167,8 @@ error_reporting(E_ALL);
   $query->bind_param("ssss", $title,$description,$resolution,$post_id);
   $query->execute();
 }
+
+// Function to display all users in superadmin panel
 
 public function getUsers()
 {

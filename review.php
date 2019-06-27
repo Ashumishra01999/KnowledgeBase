@@ -1,4 +1,7 @@
 <?php
+
+// Start session, import database and util files and check for user login
+
 session_start();
 require_once("dbconnect.php");
 
@@ -28,6 +31,9 @@ else
      <div class="logo">
          <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
      </div>
+
+     <!-- Nav bar -->
+
              <nav class="searchres-bar">
                  <ul class="nav-list">
                    <li>
@@ -53,14 +59,19 @@ else
 
 
  <main class="post-main">
+
+   <!-- Display success message on approval  -->
    <?php
    if(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
    {
      echo '<div class="postcontainer">
-           <p class="success">Issue approved successfully.</p>
+           <div class="successmessage">Issue approved successfully.</div>
            </div>';
      unset($_SESSION['approved']);
    }
+
+   // Display form
+
    elseif($num_rows > 0)
    {
      echo '<div class="postcontainer">

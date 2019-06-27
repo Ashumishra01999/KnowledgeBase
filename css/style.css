@@ -719,7 +719,12 @@ a:hover {
   color: #222222
 }
 
+<<<<<<< HEAD
 /* Dropdown */
+=======
+/* Dropdown*/
+
+>>>>>>> 45f7fe45db0174360e2c4cd26e7a38e8924efa1b
 .dropdown {
   display: inline-block;
   position: relative;

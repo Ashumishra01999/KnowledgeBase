@@ -1,4 +1,7 @@
 <?php
+
+// Start session, import database and util files and check for user login
+
 session_start();
 require_once('dbconnect.php');
 require_once('util.php');
@@ -13,6 +16,9 @@ if($_SESSION['role_type'] != 'superadmin')
   echo "<strong>Unauthorised Access</strong>";
   die();
 }
+
+// Get all posts and users from databse
+
 $dbconnection = new dbconnector;
 $dbconnection->connect();
 $allposts = $dbconnection->getallPosts();
@@ -31,6 +37,8 @@ $userlist = $dbconnection->getUsers();
     <div class="logo">
         <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
     </div>
+
+    <!-- Nav bar -->
             <nav class="searchres-bar">
                 <ul class="nav-list">
                   <li>
@@ -54,9 +62,13 @@ $userlist = $dbconnection->getUsers();
             </nav>
   </header>
 
+<!-- Tabs for unapproved, approved and users -->
+
   <main class="dash-main">
     <div class="dash-container">
       <ul class="tabs">
+
+<!-- Approved posts tab -->
 
         <li class="tab">
           <input type="radio" name="tabs" checked="checked" id="tab1" />
@@ -118,6 +130,8 @@ $userlist = $dbconnection->getUsers();
           </div>
         </li>
 
+<!-- Unapproved posts tab -->
+
         <li class="tab">
           <input type="radio" name="tabs" id="tab2" />
           <label for="tab2">Unapproved Posts</label>
@@ -169,6 +183,8 @@ $userlist = $dbconnection->getUsers();
             </form>
           </div>
         </li>
+
+<!-- User management tab -->
 
         <li class="tab">
           <input type="radio" name="tabs" id="tab3" />

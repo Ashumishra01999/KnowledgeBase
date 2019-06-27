@@ -1,4 +1,7 @@
 <?php
+
+// Start session, import database and util files and check for user login
+
 session_start();
 require_once('dbconnect.php');
 require_once('util.php');
@@ -25,6 +28,8 @@ $post = $dbconnection->getPost($_GET['post_id']);
     <div class="logo">
         <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
     </div>
+
+    <!-- Nav Bar -->
             <nav class="searchres-bar">
                 <ul class="nav-list">
                   <li>
@@ -49,6 +54,8 @@ $post = $dbconnection->getPost($_GET['post_id']);
   </header>
 
 
+  <!-- Display error if any -->
+
 <main class="post-main">
     <div class="postcontainer">
 
@@ -61,6 +68,9 @@ $post = $dbconnection->getPost($_GET['post_id']);
         if($post['approved'] == 1 || $_SESSION['role_type'] == 'superadmin')
         {
       ?>
+
+<!-- Display the selected issue -->
+
       <p class="titlelabel"><b>Title</b></p>
       <p class="title"><?php echo htmlentities($post['title']); ?></p>
       <p class="descriptionlabel"><b>Description</b></p>
@@ -75,7 +85,13 @@ $post = $dbconnection->getPost($_GET['post_id']);
         }
       ?>
     </div>
+
+<!-- Display admin dashboard, edit and approve button for superadmin account -->
+
 <?php
+<<<<<<< HEAD
+// Check if user is a superadmin
+=======
   if(isset($_SERVER['HTTP_REFERER']))
   {
     $backlink = htmlspecialchars($_SERVER['HTTP_REFERER']);
@@ -84,6 +100,7 @@ $post = $dbconnection->getPost($_GET['post_id']);
   {
     $backlink = htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']);
   }
+>>>>>>> 026ff86a0fea5f51d41cf3df42396b5f5c6da991
   if($_SESSION['role_type'] == 'superadmin')
   {
     echo '<div class="postpanel">
