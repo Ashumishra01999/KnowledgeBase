@@ -89,11 +89,23 @@ $post = $dbconnection->getPost($_GET['post_id']);
 <!-- Display admin dashboard, edit and approve button for superadmin account -->
 
 <?php
+<<<<<<< HEAD
 // Check if user is a superadmin
+=======
+  if(isset($_SERVER['HTTP_REFERER']))
+  {
+    $backlink = htmlspecialchars($_SERVER['HTTP_REFERER']);
+  }
+  else
+  {
+    $backlink = htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']);
+  }
+>>>>>>> 026ff86a0fea5f51d41cf3df42396b5f5c6da991
   if($_SESSION['role_type'] == 'superadmin')
   {
     echo '<div class="postpanel">
           <a class="btn2link" href="superadmin.php" ><button type="submit" class="nav-btn btn2">Admin Dashboard</button></a>';
+    echo '<a class="btn2link" href='.$backlink.'><button type="submit" class="nav-btn btn2">Back</button></a>';
     if($post['approved'] == 0)
     {
       echo '<form action="approve.php" method="post">
