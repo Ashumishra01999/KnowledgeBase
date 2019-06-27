@@ -21,6 +21,9 @@ if(!isset($_SESSION['username']))
     <div class="logo">
         <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
     </div>
+
+    <!-- Nav bar -->
+
             <nav class="searchres-bar">
                 <ul class="nav-list">
                   <li>
@@ -47,7 +50,11 @@ if(!isset($_SESSION['username']))
   <main>
     <div class="resultcontainer" id="resultcontainer"></div>
   </main>
+  <!-- Script to retrieve results and Implement Paging -->
   <script type="text/javascript">
+
+  // Retrieve GET parameter from address bar
+
       function showRecords(perPageCount, pageNumber) {
         var query = new RegExp('[\?&]' + 'query' + '=([^&#]*)').exec(window.location.href);
         if (query==null) {
@@ -56,6 +63,9 @@ if(!isset($_SESSION['username']))
         else {
           query = query[1];
         }
+
+  // Implement Paging using ajax
+
         $.ajax({
               type: "GET",
               url: "rendersearch.php",

@@ -1,4 +1,7 @@
 <?php
+
+// Start session user login
+
 session_start();
 if(!isset($_SESSION['username']))
 {
@@ -21,6 +24,7 @@ if(!isset($_SESSION['username']))
     <div class="logo">
         <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
     </div>
+    <!-- Nav bar -->
             <nav>
                 <ul class="nav-list">
                   <?php
@@ -41,6 +45,9 @@ if(!isset($_SESSION['username']))
                 </ul>
             </nav>
   </header>
+
+<!-- Display searchbox  -->
+
 <main>
 <div class="dashboard-container">
   <form class="searchform" action="search.php" method="get">

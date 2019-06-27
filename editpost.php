@@ -1,4 +1,7 @@
 <?php
+
+// Start session, import database and util files and check for user login
+
 session_start();
 require_once('dbconnect.php');
 require_once('util.php');
@@ -9,6 +12,8 @@ if(!isset($_SESSION['username']))
      header("Location:login.php");
 }
 
+// If all fields in form are set then edit post
+
 if( isset($_POST['title']) && isset($_POST['description']) && isset($_POST['resolution']) && isset($_POST['post_id']))
 {
   $dbconnection = new dbconnector;
@@ -18,12 +23,16 @@ if( isset($_POST['title']) && isset($_POST['description']) && isset($_POST['reso
   header( 'Location: superadmin.php' ) ;
 }
 
+// If get id is not set, redirect to superadmin panel
+
 if(! isset($_GET['post_id']))
 {
   $_SESSION['error'] = "Missing Post ID";
   header('Location: superadmin.php');
 }
 
+
+// get the post to edit
 
 $dbconnection = new dbconnector;
 $dbconnection->connect();
@@ -51,6 +60,8 @@ $post_id = $post['post_id'];
         <div class="logo">
             <a href="dashboard.php" class="logo-link"><p>AIS Knowledge Base </p></a>
         </div>
+
+        <!-- Nav bar -->
                 <nav class="searchres-bar">
                     <ul class="nav-list">
                       <li>
@@ -73,8 +84,14 @@ $post_id = $post['post_id'];
                     </ul>
                 </nav>
       </header>
+
 <main>
+
+
   <div class="addnew-main">
+
+<!-- Display error if any -->
+
     <?php
      if(isset($_SESSION['error']))
      {
@@ -90,6 +107,9 @@ $post_id = $post['post_id'];
        }
      }
     ?>
+
+  <!-- Display issue to edit   -->
+
   <form class="form-default form-create-topic"  method="post" name="editissue">
           <div class="form-group">
               <label for="title">Topic Title</label>
@@ -108,6 +128,8 @@ $post_id = $post['post_id'];
           <input type="hidden" name="post_id" value="<?= $post_id ?>">
           <button type="submit"class="btn btn-secondary" >Submit</button>
       </form>
+
+<!-- Javascript for form validation -->
 
 <script>
     $(function() {

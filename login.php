@@ -27,6 +27,8 @@ if(isset($_SESSION['username']))
                     <div class="logintitle">
                         <p >AIS Knowledge Base </p>
                     </div>
+
+                    <!-- Display error if any -->
                     <?php
                      if(isset($_SESSION['error']))
                      {
@@ -41,6 +43,8 @@ if(isset($_SESSION['username']))
                          unset($_SESSION['error']);
                        }
                      }
+                    // User login form
+
                     ?>
                       <form class="form-default" action="validate.php" method="post" name="login">
                           <div class="form-group">
@@ -59,6 +63,8 @@ if(isset($_SESSION['username']))
               </div>
           </div>
       </main>
+
+<!-- jQuery for form validation -->
 
   <script>
         $(function() {
