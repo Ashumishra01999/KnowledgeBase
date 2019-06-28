@@ -27,6 +27,34 @@ error_reporting(E_ALL);
       return $query->get_result();
     }
 
+// Functio to register a new users
+
+    public function register($name, $username, $password, $email, $role)
+    {
+      global $dblink;
+      $query = $dblink->prepare("INSERT INTO login_credentials (name, username, password, email, role_type) values(?, ?, ?, ?, ?)");
+      $query->bind_param("sssss", $name, $username, $password, $email, $role);
+      if($query->execute())
+      {
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
+    }
+
+// Functio to check username availability
+
+    public function checkavailability($username)
+    {
+      global $dblink;
+      $query = $dblink->prepare("SELECT username FROM login_credentials WHERE username = ?");
+      $query->bind_param("s", $username);
+      $query->execute();
+      return $query->get_result();
+    }
+
 // Function to add a new issue
 
     public function addIssue($title, $description, $resolution, $user_id, $auth_id1, $auth_id2)//SQL in php for insertion of new data in posts table

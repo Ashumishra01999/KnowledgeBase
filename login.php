@@ -23,7 +23,7 @@ if(isset($_SESSION['username']))
       <main class="login-main">
           <div class="container">
               <div class="loginpage-wrapper">
-                  <div class="loginpanel">
+                  <div class="accountpanel">
                     <div class="logintitle">
                         <p >AIS Knowledge Base </p>
                     </div>
@@ -34,12 +34,12 @@ if(isset($_SESSION['username']))
                      {
                        if($_SESSION['error']=='login')
                        {
-                         displayerror('login');
+                         displayerror('','login');
                          unset($_SESSION['error']);
                        }
                        elseif($_SESSION['error']=='noaccess')
                        {
-                         displayerror('noaccess');
+                         displayerror('','noaccess');
                          unset($_SESSION['error']);
                        }
                      }

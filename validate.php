@@ -1,6 +1,6 @@
 <?php
+require_once("dbconnect.php");
 session_start();
-include("dbconnect.php");
 $dbconnection = new dbconnector;
 $dbconnection->connect();
 
