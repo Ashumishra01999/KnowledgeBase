@@ -298,6 +298,7 @@ main {
 button.nav-btn {
   font-size: 16px;
   padding: 4px 15px 5px;
+  margin: 10px 0 10px 0;
   line-height: 1;
   font-weight: 500;
   height: 39px;
@@ -513,6 +514,10 @@ div.bottom-nav {
   text-decoration: none;
 }
 
+.nav-darklnk {
+  text-decoration: none;
+}
+
 .logo-link {
   text-decoration: none;
 }
@@ -589,6 +594,11 @@ div.bottom-nav {
 .dash-container .message {
   color: green;
   display: block;
+}
+
+.table-link {
+  display: float;
+  float: right;
 }
 
 .postlist {

@@ -40,7 +40,7 @@ $post = $dbconnection->getPost($_GET['post_id']);
                         </div>
                     </form>
                   </li>
-                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
+                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</button></a></li>
                     <li>
                       <div class="dropdown">
                         <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>

@@ -49,7 +49,7 @@ $userlist = $dbconnection->getUsers();
                         </div>
                     </form>
                   </li>
-                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
+                    <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</button></a></li>
                     <li>
                       <div class="dropdown">
                         <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
@@ -74,7 +74,6 @@ $userlist = $dbconnection->getUsers();
           <input type="radio" name="tabs" checked="checked" id="tab1" />
           <label for="tab1">Approved Posts</label>
           <div id="tab-content1" class="content">
-            <form method = "GET" action='delete.php'>
               <?php
               if(isset($_SESSION['success']))
               {
@@ -126,7 +125,6 @@ $userlist = $dbconnection->getUsers();
                 }
                 ?>
               </table>
-            </form>
           </div>
         </li>
 
@@ -136,7 +134,6 @@ $userlist = $dbconnection->getUsers();
           <input type="radio" name="tabs" id="tab2" />
           <label for="tab2">Unapproved Posts</label>
           <div id="tab-content2" class="content">
-            <form method = "GET" action='delete.php'>
               <table class="postlist">
                 <tr>
                   <th class="text-center">User</th>
@@ -180,7 +177,6 @@ $userlist = $dbconnection->getUsers();
                 }
                 ?>
               </table>
-            </form>
           </div>
         </li>
 
@@ -190,7 +186,9 @@ $userlist = $dbconnection->getUsers();
           <input type="radio" name="tabs" id="tab3" />
           <label for="tab3">User Management</label>
           <div id="tab-content3" class="content">
-            <form method = "GET" action='delete.php'>
+            <div class="table-link">
+              <a class="nav-darklnk" href="register.php"><button type="submit" class="nav-btn">Add New User</button></a>
+            </div>
               <table class="postlist">
                 <tr>
                   <th class="text-center">User ID</th>
@@ -221,7 +219,6 @@ $userlist = $dbconnection->getUsers();
                 }
                 ?>
               </table>
-            </form>
           </div>
         </li>
 

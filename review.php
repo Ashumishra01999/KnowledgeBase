@@ -45,14 +45,19 @@ else
                      </form>
                    </li>
                      <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
-                     <li>
+                     <?php
+                     if(isset($_SESSION['username']))
+                     {
+                     echo '<li>
                        <div class="dropdown">
-                         <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
+                         <button type="submit" class="nav-btn">'.$_SESSION['name'].'</button>
                          <div class="dropdown-content">
                          <a href="logout.php">Logout</a>
                          </div>
                        </div>
-                     </li>
+                     </li>';
+                    }
+                     ?>
                  </ul>
              </nav>
    </header>
