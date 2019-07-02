@@ -69,22 +69,13 @@ error_reporting(E_ALL);
 
 // Function to search approved posts accessible to admins
 
-    public function search($query)//accessing posts table from kb databse to give search results
+    public function search($searchquery)//accessing posts table from kb databse to give search results
     {
       global $dblink;
-      $keyword = explode(" ", $query);
-      $query ="SELECT post_id, title, description FROM posts WHERE title like '%" . $keyword[0] . "%'";
-
-     for($i = 1; $i < count($keyword); $i++)
-     {
-        if(!empty($keyword[$i]))
-        {
-            $query .= " AND title like '%" . $keyword[$i] . "%'";
-        }
-      }
-      $query .= 'AND approved = 1';
-      $result = $dblink->query($query);
-      return $result->fetch_all(MYSQLI_ASSOC);
+      $query =  $dblink->prepare("SELECT post_id, title, description FROM posts WHERE MATCH (title,description, resolution) AGAINST (? IN NATURAL LANGUAGE MODE) AND approved=1");
+      $query->bind_param('s', $searchquery);
+      $query->execute();
+      return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
     }
 
 // Function to get an approved post

@@ -107,7 +107,6 @@ $userlist = $dbconnection->getUsers();
                         <div class="dd-button">
                           Action
                         </div>
-                        <input type="checkbox" class="dd-input" id="test">
                         <ul class="dd-menu">
                           <li><?php echo('<a href="post.php?post_id='.$post['post_id'].'">View</a>'); ?> </li>
                           <li><?php echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>'); ?> </li>
@@ -159,7 +158,6 @@ $userlist = $dbconnection->getUsers();
                         <div class="dd-button">
                           Action
                         </div>
-                        <input type="checkbox" class="dd-input" id="test">
                         <ul class="dd-menu">
                           <li><?php echo('<a href="post.php?post_id='.$post['post_id'].'">Review</a>'); ?> </li>
                           <li><?php echo('<a href="editpost.php?post_id='.$post['post_id'].'">Edit</a>'); ?> </li>

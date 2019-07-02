@@ -716,14 +716,6 @@ div.bottom-nav {
   text-align: right;
 }
 
-/* Superadmin Panel Dropdown Button */
-body {
-  /* color: #000000; */
-  font-family: Sans-Serif;
-  /* padding: 30px; */
-  /* background-color: #f6f6f6; */
-}
-
 .postlist a {
   text-decoration: none;
   color: #000000;
@@ -734,7 +726,7 @@ body {
 }
 
 /* Dropdown */
-.dropdown {
+label.dropdown {
   display: inline-block;
   position: relative;
   margin: 5px;
@@ -766,11 +758,6 @@ body {
 
 .dd-button:hover {
   background-color: #eeeeee;
-  ]
-}
-
-.dd-input {
-  display: none;
 }
 
 .dd-menu {
@@ -779,6 +766,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   padding: 0;
+  display: none;
   margin: 2px 0 0 0;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
@@ -786,11 +774,7 @@ body {
   z-index: 1;
 }
 
-.dd-input+.dd-menu {
-  display: none;
-}
-
-.dd-input:checked+.dd-menu {
+.tabs .dropdown:hover .dd-menu {
   display: block;
 }
 
