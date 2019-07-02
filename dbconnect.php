@@ -162,7 +162,7 @@ error_reporting(E_ALL);
   public function getallPosts()
   {
     global $dblink;
-    $query = $dblink->prepare("SELECT login_credentials.name, post_id ,title, description, resolution, approved FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id");
+    $query = $dblink->prepare("SELECT login_credentials.name, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id");
     $query->execute();
     return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
   }
