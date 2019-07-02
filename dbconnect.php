@@ -83,7 +83,7 @@ error_reporting(E_ALL);
     public function getPost($post_id)
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT post_id ,title, description, resolution, approved FROM posts WHERE post_id = ?");//showing of the local results after accessing results from the posts table
+      $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
       $query->bind_param("s", $post_id);
       $query->execute();
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);

@@ -8,24 +8,30 @@ require_once('util.php');
 
 if(!isset($_SESSION['username']))
 {
-     $_SESSION['error'] = 'noaccess';
-     header("Location:login.php");
+     if(!isset($_POST['auth_id']))
+     {
+       $_SESSION['error'] = 'noaccess';
+       header("Location:login.php");
+     }
 }
 
+$dbconnection = new dbconnector;
+$dbconnection->connect();
 // If all fields in form are set then edit post
 
-if( isset($_POST['title']) && isset($_POST['description']) && isset($_POST['resolution']) && isset($_POST['post_id']))
+if(isset($_POST['action']))
 {
-  $dbconnection = new dbconnector;
-  $dbconnection->connect();
-  $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
-  $_SESSION['success'] = 'Record Updated';
+  if($_POST['action'] == 'update')
+  {
+    $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
+    $_SESSION['success'] = 'Record Updated';
+  }
   header( 'Location: superadmin.php' ) ;
 }
 
 // If get id is not set, redirect to superadmin panel
 
-if(! isset($_GET['post_id']))
+if(!isset($_GET['post_id']))
 {
   $_SESSION['error'] = "Missing Post ID";
   header('Location: superadmin.php');
@@ -34,8 +40,6 @@ if(! isset($_GET['post_id']))
 
 // get the post to edit
 
-$dbconnection = new dbconnector;
-$dbconnection->connect();
 $post = $dbconnection->getPost($_GET['post_id']);
 
 $title = $post['title'];
@@ -126,7 +130,8 @@ $post_id = $post['post_id'];
 
           </div>
           <input type="hidden" name="post_id" value="<?= $post_id ?>">
-          <button type="submit"class="btn btn-secondary" >Submit</button>
+          <button type="submit" name="action" value="update" class="btn btn-secondary" >Update</button>
+          <button type="submit" name="action" value="cancel" class="btn btn-secondary" >Cancel</button>
       </form>
 
 <!-- Javascript for form validation -->

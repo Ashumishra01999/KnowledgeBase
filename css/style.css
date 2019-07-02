@@ -484,6 +484,23 @@ div.bottom-nav {
   background-color: #f4f4f4;
 }
 
+.postcontainer .post-details {
+  height: 60px;
+  font-size: 14px;
+}
+
+.postcontainer .post-details .author {
+  display: inline-block;
+  float: left;
+  color: #707a80;
+}
+
+.postcontainer .post-details .posttime {
+  display: inline-block;
+  float: right;
+  color: #707a80;
+}
+
 .dash-container {
   display: block;
   margin: 40px 10% 20px 10%;
@@ -597,7 +614,6 @@ div.bottom-nav {
 }
 
 .table-link {
-  display: float;
   float: right;
 }
 

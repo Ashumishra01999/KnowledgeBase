@@ -70,7 +70,10 @@ $post = $dbconnection->getPost($_GET['post_id']);
       ?>
 
 <!-- Display the selected issue -->
-
+      <div class="post-details">
+        <p class="author"><?php echo 'Author: '.htmlentities($post['name']).'('.htmlentities($post['username']).')';?></p>
+        <p class="posttime"><?php echo 'Added on: '.date("F j, Y", strtotime($post['creation_time'])); ?></p>
+      </div>
       <p class="titlelabel"><b>Title</b></p>
       <p class="title"><?php echo htmlentities($post['title']); ?></p>
       <p class="descriptionlabel"><b>Description</b></p>
