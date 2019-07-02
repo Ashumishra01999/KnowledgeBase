@@ -85,6 +85,7 @@ $userlist = $dbconnection->getUsers();
               <table class="postlist">
                 <tr>
                   <th class="text-center">User</th>
+                  <th class="text=center">Date</th>
                   <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -97,11 +98,13 @@ $userlist = $dbconnection->getUsers();
                     $found++;
                     echo "<tr><td class='text-left'>";
                     echo htmlentities($post['name']);
-                    echo("</td><td class='text-left'>");
-                    echo(htmlentities($post['title']));
-                    echo("</td><td class='text-left'>");
-                    echo(htmlentities($post['description']));
-                    echo("</td><td class='text-left'>");
+                    echo "</td><td class='text-left'>";
+                    echo (htmlentities (date('d-m-Y', strtotime($post['creation_time']))));
+                    echo ("</td><td class='text-left'>");
+                    echo (htmlentities($post['title']));
+                    echo ("</td><td class='text-left'>");
+                    echo (htmlentities($post['description']));
+                    echo ("</td><td class='text-left'>");
                     ?>
                     <label class="dropdown">
                         <div class="dd-button">
@@ -136,6 +139,7 @@ $userlist = $dbconnection->getUsers();
               <table class="postlist">
                 <tr>
                   <th class="text-center">User</th>
+                  <th class="text-center">Date</th>
                   <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
@@ -148,6 +152,8 @@ $userlist = $dbconnection->getUsers();
                     $found++;
                     echo "<tr><td class='text-left'>";
                     echo htmlentities($post['name']);
+                    echo "</td><td class='text-left'>";
+                    echo (htmlentities (date('d-m-Y', strtotime($post['creation_time']))));
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($post['title']));
                     echo("</td><td class='text-left'>");
