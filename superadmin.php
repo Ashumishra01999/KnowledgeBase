@@ -123,7 +123,7 @@ $userlist = $dbconnection->getUsers();
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='4'>No Issues Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='5'>No Issues Found</td></tr>";
                 }
                 ?>
               </table>
@@ -177,7 +177,7 @@ $userlist = $dbconnection->getUsers();
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='4'>No Issues Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='5'>No Issues Found</td></tr>";
                 }
                 ?>
               </table>
@@ -203,8 +203,6 @@ $userlist = $dbconnection->getUsers();
                 <?php
                 $found = 0;
                 foreach($userlist as $user){
-                  if($post['approved'] == 0)
-                  {
                     $found++;
                     echo "<tr><td class='text-left'>";
                     echo htmlentities($user['id']);
@@ -215,11 +213,10 @@ $userlist = $dbconnection->getUsers();
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($user['role_type']));
                     echo("</td></tr>");
-                  }
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='3'>No Issues Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='4'>No Users Found</td></tr>";
                 }
                 ?>
               </table>
