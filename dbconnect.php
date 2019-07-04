@@ -80,12 +80,21 @@ error_reporting(E_ALL);
 
 // Function to get an approved post
 
-    public function getPost($post_id)
+    public function getPost($id, $source = '')
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
-      $query->bind_param("s", $post_id);
-      $query->execute();
+      if($source == 'from Review')
+      {
+        $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE auth_id1 = ? OR auth_id2 = ?");//showing of the local results after accessing results from the posts table
+        $query->bind_param("ss", $id, $id);
+        $query->execute();
+      }
+      else
+      {
+        $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
+        $query->bind_param("s", $id);
+        $query->execute();
+      }
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
     }
 
@@ -93,7 +102,7 @@ error_reporting(E_ALL);
 
     public function getunapproved($auth_id){
     global $dblink;
-    $query = $dblink->prepare("SELECT post_id, title, description, resolution FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
+    $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
     $query->bind_param("ss", $auth_id, $auth_id);
     $query->execute();
     return ($query->get_result());

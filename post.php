@@ -62,7 +62,7 @@ $post = $dbconnection->getPost($_GET['post_id']);
       <?php
       if(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
       {
-        echo '<p class="success">Issue approved successfully.</p>';
+        echo '<p class="successmessage">Issue approved successfully.</p>';
         unset($_SESSION['approved']);
       }
         if($post['approved'] == 1 || $_SESSION['role_type'] == 'superadmin')
