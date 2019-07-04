@@ -192,8 +192,6 @@ $userlist = $dbconnection->getUsers();
           <div id="tab-content3" class="content">
             <div class="table-link">
               <a class="nav-darklnk" href="register.php"><button type="submit" class="nav-btn">Add New User</button></a>
-              <a class="nav-darklnk" href="#"><button type="submit" class="nav-btn">Delete User</button></a>
-              <a class="nav-darklnk" href="#"><button type="submit" class="nav-btn">Edit User</button></a>
             </div>
               <table class="postlist">
                 <tr>
