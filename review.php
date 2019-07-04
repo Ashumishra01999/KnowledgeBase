@@ -10,7 +10,7 @@ if(isset($_GET['auth_id']))
   $dbconnection = new dbconnector;
   $dbconnection->connect();
   $result = $dbconnection->getunapproved($_GET['auth_id']);
-  $rows = $result->fetch_array(MYSQLI_ASSOC);
+  $post = $result->fetch_array(MYSQLI_ASSOC);
   $num_rows = $result->num_rows;
 }
 else
@@ -79,26 +79,31 @@ else
 
    elseif($num_rows > 0)
    {
-     echo '<div class="postcontainer">
-            <p class="titlelabel"><b>Title</b></p>
-            <p class="title">'.htmlentities($rows['title']).'</p>
+     echo '<div class="postcontainer">';
+     if(isset($_SESSION['success']))
+     {
+       echo '<p class="successmessage">'.$_SESSION['success'].'</p>';
+       unset($_SESSION['success']);
+     }
+          echo  '<p class="titlelabel"><b>Title</b></p>
+            <p class="title">'.htmlentities($post['title']).'</p>
             <p class="descriptionlabel"><b>Description</b></p>
-            <p class="description">'.htmlentities($rows['description']).'</p>
+            <p class="description">'.htmlentities($post['description']).'</p>
             <p class="resolutionlabel"><b>Resolution</b></p>
-            <p class="resolution">'.htmlentities($rows['resolution']).'</p>
+            <p class="resolution">'.htmlentities($post['resolution']).'</p>
           </div>
           <div class="postpanel">
             <form action="approve.php" method="post">
               <input type="hidden" name="auth_id" value="'.htmlentities($_GET['auth_id']).'">
               <button type="submit" class="nav-btn btn2">Approve</button>
             </form>
-            <a class="btn2link" href="editpost.php?post_id='.$_GET['auth_id'].'"><button type="submit" class="nav-btn btn2 btn2">Edit</button></a>
+            <a class="btn2link" href="editpost.php?auth_id='.$_GET['auth_id'].'"><button type="submit" class="nav-btn btn2 btn2">Edit</button></a>
             </div>';
     }
     else
     {
       echo '<div class="postcontainer">
-            <p class="error">Issue already approved or does not exist.</p>
+            <p class="errormessage">Issue already approved or does not exist.</p>
             </div>';
     }
     ?>

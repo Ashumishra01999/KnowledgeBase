@@ -6,9 +6,9 @@ session_start();
 require_once('dbconnect.php');
 require_once('util.php');
 
-if(!isset($_SESSION['username']))
+if(!isset($_SESSION['username']) || $_SESSION['role_type'] != 'superadmin')
 {
-     if(!isset($_POST['auth_id']))
+     if(!isset($_GET['auth_id']) && !isset($_POST['auth_id']))
      {
        $_SESSION['error'] = 'noaccess';
        header("Location:login.php");
@@ -26,12 +26,19 @@ if(isset($_POST['action']))
     $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
     $_SESSION['success'] = 'Record Updated';
   }
-  header( 'Location: superadmin.php' ) ;
+  if(isset($_POST['auth_id']))
+  {
+    header('Location: review.php?auth_id='.$_POST['auth_id']);
+  }
+  else
+  {
+    header( 'Location: superadmin.php' );
+  }
 }
 
 // If get id is not set, redirect to superadmin panel
 
-if(!isset($_GET['post_id']))
+if(!isset($_GET['post_id']) && isset($_SESSION['username']))
 {
   $_SESSION['error'] = "Missing Post ID";
   header('Location: superadmin.php');
@@ -39,8 +46,14 @@ if(!isset($_GET['post_id']))
 
 
 // get the post to edit
-
-$post = $dbconnection->getPost($_GET['post_id']);
+if(isset($_GET['post_id']))
+{
+  $post = $dbconnection->getPost($_GET['post_id']);
+}
+else
+{
+  $post = $dbconnection->getPost($_GET['auth_id'], 'from Review');
+}
 
 ?>
 <!doctype html>
@@ -70,14 +83,19 @@ $post = $dbconnection->getPost($_GET['post_id']);
                         </form>
                       </li>
                         <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
-                        <li>
-                          <div class="dropdown">
-                            <button type="submit" class="nav-btn"><?php echo $_SESSION['name']; ?></button>
-                            <div class="dropdown-content">
-                            <a href="logout.php">Logout</a>
+                          <?php
+                          if(isset($_SESSION['username']))
+                          {
+                          echo '<li>
+                            <div class="dropdown">
+                              <button type="submit" class="nav-btn">'.$_SESSION['name'].'</button>
+                              <div class="dropdown-content">
+                              <a href="logout.php">Logout</a>
+                              </div>
                             </div>
-                          </div>
-                        </li>
+                          </li>';
+                         }
+                          ?>
                     </ul>
                 </nav>
       </header>
@@ -105,7 +123,9 @@ $post = $dbconnection->getPost($_GET['post_id']);
      }
 
   // Display issue to edit
-  if()
+  if($post != NULL)
+  {
+  ?>
   <form class="form-default form-create-topic"  method="post" name="editissue">
           <div class="form-group">
               <label for="title">Topic Title</label>
@@ -122,9 +142,20 @@ $post = $dbconnection->getPost($_GET['post_id']);
 
           </div>
           <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
+          <?php if(isset($_GET['auth_id']))
+                { echo '<input type="hidden" name="auth_id" value="'.$_GET['auth_id'].'">'; }
+          ?>
+          <input type="hidden" name="moderator" value="<?= isset($_GET['auth_id'])? 'admin' : 'superadmin' ?>">
           <button type="submit" name="action" value="update" class="btn btn-secondary" >Update</button>
           <button type="submit" name="action" value="cancel" class="btn btn-secondary" >Cancel</button>
       </form>
+      <?php
+    }
+    else
+    {
+      displayerror("Post not found");
+    }
+      ?>
 
 <!-- Javascript for form validation -->
 
