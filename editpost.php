@@ -103,9 +103,9 @@ $post = $dbconnection->getPost($_GET['post_id']);
          unset($_SESSION['error']);
        }
      }
+?>
+  <!-- Display issue to edit -->
 
-  // Display issue to edit
-  if()
   <form class="form-default form-create-topic"  method="post" name="editissue">
           <div class="form-group">
               <label for="title">Topic Title</label>

@@ -197,4 +197,21 @@ public function getUsers()
   return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
 }
 
+public function getUser($id)
+{
+  global $dblink;
+  $query = $dblink->prepare("SELECT id, name, username, role_type, email, password FROM login_credentials WHERE id = ?");
+  $query->bind_param("i", $id);
+  $query->execute();
+  return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
+}
+
+public function updateUser($name, $username, $password, $email, $role_type, $id)
+{
+  global $dblink;
+  $query = $dblink->prepare("UPDATE login_credentials SET name = ?,  username = ?, password = ?, email = ?, role_type = ? WHERE id = ?");
+  $query->bind_param("sssssi", $name, $username, $password, $email, $role_type, $id);
+  $query->execute();
+}
+
 }

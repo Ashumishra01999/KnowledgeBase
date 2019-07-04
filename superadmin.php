@@ -199,6 +199,7 @@ $userlist = $dbconnection->getUsers();
                   <th class="text-center">Name</th>
                   <th class="text-center">Username</th>
                   <th class="text-center">Role</th>
+                  <th class="text-center">Action</th>
                 </tr>
                 <?php
                 $found = 0;
@@ -212,6 +213,19 @@ $userlist = $dbconnection->getUsers();
                     echo(htmlentities($user['username']));
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($user['role_type']));
+                    echo("</td><td class='text-left'>");
+                    ?>
+                    <label class="dropdown">
+                        <div class="dd-button">
+                          Action
+                        </div>
+                        <ul class="dd-menu">
+                          <li><?php echo('<a href="edituser.php?id='.$user['id'].'">Edit</a>'); ?> </li>
+                          <li><?php echo('<a href="delete.php?id='.$user['id'].'">Delete</a>'); ?> </li>
+
+                        </ul>
+                      </label>
+                    <?php
                     echo("</td></tr>");
                 }
                 if(!$found)
