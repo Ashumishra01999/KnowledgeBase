@@ -42,13 +42,6 @@ if(!isset($_GET['post_id']))
 
 $post = $dbconnection->getPost($_GET['post_id']);
 
-$title = $post['title'];
-$description = $post['description'];
-$resolution = $post['resolution'];
-$post_id = $post['post_id'];
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -110,26 +103,25 @@ $post_id = $post['post_id'];
          unset($_SESSION['error']);
        }
      }
-    ?>
 
-  <!-- Display issue to edit   -->
-
+  // Display issue to edit
+  if()
   <form class="form-default form-create-topic"  method="post" name="editissue">
           <div class="form-group">
               <label for="title">Topic Title</label>
-                  <input type="text" name="title" value="<?= $title ?>"class="form-control issue-title" id="title" placeholder="Title of your Issue">
+                  <input type="text" name="title" value="<?= $post['title'] ?>"class="form-control issue-title" id="title" placeholder="Title of your Issue">
 
           </div>
           <div class="form-group">
               <label for="description">Description</label>
-                  <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"><?= $description ?></textarea>
+                  <textarea name="description" class="form-control form-textarea" rows="5" cols="100" placeholder="Please Describe the Issue"><?= $post['description'] ?></textarea>
           </div>
           <div class="form-group">
               <label for="resolution">Resolution</label>
-                  <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"><?= $resolution ?></textarea>
+                  <textarea name="resolution" class="form-control form-textarea" rows="5" cols="100" placeholder="Resolution for the Described Issue"><?= $post['resolution'] ?></textarea>
 
           </div>
-          <input type="hidden" name="post_id" value="<?= $post_id ?>">
+          <input type="hidden" name="post_id" value="<?= $post['post_id'] ?>">
           <button type="submit" name="action" value="update" class="btn btn-secondary" >Update</button>
           <button type="submit" name="action" value="cancel" class="btn btn-secondary" >Cancel</button>
       </form>

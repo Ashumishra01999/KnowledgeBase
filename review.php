@@ -92,6 +92,7 @@ else
               <input type="hidden" name="auth_id" value="'.htmlentities($_GET['auth_id']).'">
               <button type="submit" class="nav-btn btn2">Approve</button>
             </form>
+            <a class="btn2link" href="editpost.php?post_id='.$_GET['auth_id'].'"><button type="submit" class="nav-btn btn2 btn2">Edit</button></a>
             </div>';
     }
     else

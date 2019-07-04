@@ -475,7 +475,7 @@ div.bottom-nav {
 
 .postcontainer {
   display: inline-block;
-  margin-top: 2%;
+  margin: 20px 0 20px 0;
   width: 85%;
   padding: 14px 10px;
   outline: none;
