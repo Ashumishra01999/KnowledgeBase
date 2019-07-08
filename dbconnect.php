@@ -223,4 +223,12 @@ public function updateUser($name, $username, $password, $email, $role_type, $id)
   $query->execute();
 }
 
+public function deleteUser($id)
+{
+  global $dblink;
+  $query = $dblink->prepare("DELETE FROM login_credentials WHERE id = ?");
+  $query->bind_param("i", $id);
+  $query->execute();
+}
+
 }

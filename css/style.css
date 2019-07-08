@@ -815,3 +815,15 @@ label.dropdown {
   padding: 0;
   /* border-bottom: 1px solid #cccccc; */
 }
+
+.confirm-action{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-action>p{
+  font-size: 1.5rem;
+}

@@ -37,9 +37,9 @@ if(!isset($_GET['id']))
 }
 
 
-// get the post to edit
+// get the user details to edit
 
-$user = $dbconnection->getUser($_GET['id']);
+$user = $dbconnection->deleteUser($_GET['id']);
 
 ?>
 <!doctype html>

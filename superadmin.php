@@ -221,7 +221,7 @@ $userlist = $dbconnection->getUsers();
                         </div>
                         <ul class="dd-menu">
                           <li><?php echo('<a href="edituser.php?id='.$user['id'].'">Edit</a>'); ?> </li>
-                          <li><?php echo('<a href="delete.php?id='.$user['id'].'">Delete</a>'); ?> </li>
+                          <li><?php echo('<a href="deleteuser.php?id='.$user['id'].'">Delete</a>'); ?> </li>
 
                         </ul>
                       </label>
