@@ -39,7 +39,7 @@ if(!isset($_GET['id']))
 
 // get the user details to edit
 
-$user = $dbconnection->deleteUser($_GET['id']);
+$user = $dbconnection->getUser($_GET['id']);
 
 ?>
 <!doctype html>
@@ -121,6 +121,8 @@ $user = $dbconnection->deleteUser($_GET['id']);
                               <?php if($user['role_type'] == 'superadmin')
                               {
                                 echo '<option value="superadmin" selected>Superadmin</option>';
+                                echo '<option value="admin">Admin</option>';
+                                echo '<option value="developer">Developer</option>';
                               }
 
                               elseif($user['role_type'] == 'developer')
