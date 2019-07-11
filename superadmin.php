@@ -85,7 +85,7 @@ $userlist = $dbconnection->getUsers();
               <table class="postlist">
                 <tr>
                   <th class="text-center">User</th>
-                  <th class="text=center">Date</th>
+                  <th class="text-center">Date</th>
                   <th class="text-center">Issue Title</th>
                   <th class="text-center">Description</th>
                   <th class="text-center">Action</th>
