@@ -41,7 +41,7 @@ function newissue_mailer($title, $description, $resolution, $auth_id, $isReminde
   $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
   // Create email headers
-  $headers .= 'From: '.$from."\r\n".
+  $headers .= 'From: AIS Knowledge Base <'.$from.'>'."\r\n".
     'Reply-To: '.$from."\r\n" .
     'X-Mailer: PHP/' . phpversion();
   $state = 1;

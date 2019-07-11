@@ -106,17 +106,17 @@
         // Specify validation error messages
         messages: {
           title: {
-            required: "<br>Please provide a title",
-            minlength: "<br>The title must be at least 10 characters long",
-            maxlength: "<br>The title must be less than 250 characters long"
+            required: "Please provide a title",
+            minlength: "The title must be at least 10 characters long",
+            maxlength: "The title must be less than 250 characters long"
           },
           description: {
-            required: "<br>Please provide a description",
-            minlength: "<br>The description must be at least 10 characters long"
+            required: "Please provide a description",
+            minlength: "The description must be at least 10 characters long"
           },
           resolution: {
-            required: "<br>Please provide a resolution",
-            minlength: "<br>The resolution must be at least 10 characters long"
+            required: "Please provide a resolution",
+            minlength: "The resolution must be at least 10 characters long"
           },
         },
         submitHandler: function(form) {

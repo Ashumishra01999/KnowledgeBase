@@ -87,14 +87,14 @@ if(isset($_SESSION['username']))
       // Specify validation error messages
       messages: {
         username: {
-          required: "<br>Please provide a username",
-          minlength: "<br>The username must be at least 5 characters long",
-          maxlength: "<br>The username must be less than 20 characters long"
+          required: "Please provide a username",
+          minlength: "The username must be at least 5 characters long",
+          maxlength: "The username must be less than 20 characters long"
         },
         password: {
-          required: "<br>Please provide a password",
-          minlength: "<br>The password must be at least 5 characters long",
-          maxlength: "<br>The password must be less than 20 characters long"
+          required: "Please provide a password",
+          minlength: "The password must be at least 5 characters long",
+          maxlength: "The password must be less than 20 characters long"
         },
       },
       // Make sure the form is submitted to the destination defined

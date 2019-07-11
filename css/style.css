@@ -120,7 +120,7 @@ label {
 }
 
 label.error {
-  display: inline-block;
+  display: block;
   color: red;
   height: 20px;
 }
