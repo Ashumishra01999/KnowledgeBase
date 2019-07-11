@@ -34,15 +34,18 @@ $post = $dbconnection->getPost($_GET['post_id']);
 <html>
 <head>
 <title>Delete</title>
+<link rel="stylesheet" href="css\style.css">
+<link rel="icon" type="image/png" href="images/favicon.png">
 </head>
 <body>
   <!-- Display confirmation message and button to confirm deleting a post -->
-
+<div class="confirm-action">
 <p>Confirm: Deleting Post With title : <?php echo $post['title']; ?></p>
 <form method="post">
 <input type="hidden" name="post_id" value="<?= $_GET['post_id'] ?>">
-<input type="submit" value="Delete" name="delete">
-<a href="superadmin.php">Cancel</a>
+<button type="submit" name="delete" value="delete" class="btn btn-secondary">Delete</button>
+<a href="superadmin.php" class="btn btn-secondary btn2link">Cancel</a>
 </form>
+</div>
 </body>
 </html>
