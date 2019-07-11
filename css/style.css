@@ -138,6 +138,10 @@ button, input {
   overflow: visible;
 }
 
+a {
+  text-decoration: none;
+}
+
 input, button, select, optgroup, textarea {
   margin: 0;
   font-family: inherit;
@@ -242,7 +246,6 @@ header li {
 
 header li a {
   color: black;
-  text-decoration: none;
 }
 
 .logo {
@@ -816,7 +819,7 @@ label.dropdown {
   /* border-bottom: 1px solid #cccccc; */
 }
 
-.confirm-action{
+.confirm-action {
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -824,6 +827,6 @@ label.dropdown {
   justify-content: center;
 }
 
-.confirm-action>p{
+.confirm-action>p {
   font-size: 1.5rem;
 }
