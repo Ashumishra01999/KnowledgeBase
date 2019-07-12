@@ -30,6 +30,7 @@ $userlist = $dbconnection->getUsers();
   <title>Super-Admin Dashboard - Knowledge Center</title>
   <link rel="stylesheet" href="css\style.css">
   <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
   <script src="js/javascript.js"></script>
 </head>
 <body>
@@ -198,6 +199,7 @@ $userlist = $dbconnection->getUsers();
                   <th class="text-center">User ID</th>
                   <th class="text-center">Name</th>
                   <th class="text-center">Username</th>
+                  <th class="text-center">Password</th>
                   <th class="text-center">Role</th>
                   <th class="text-center">Action</th>
                 </tr>
@@ -211,6 +213,9 @@ $userlist = $dbconnection->getUsers();
                     echo htmlentities($user['name']);
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($user['username']));
+                    echo("</td><td class='text-left'>");
+                    echo("<span id='userpassword".$found."' class='securetext'>".htmlentities($user['password'])."</span>
+                          <span toggle='#userpassword".$found."' class='fa fa-fw fa-eye field-icon toggle-password'></span>");
                     echo("</td><td class='text-left'>");
                     echo(htmlentities($user['role_type']));
                     echo("</td><td class='text-left'>");
@@ -230,7 +235,7 @@ $userlist = $dbconnection->getUsers();
                 }
                 if(!$found)
                 {
-                  echo "<tr><td class='text-center' colspan='4'>No Users Found</td></tr>";
+                  echo "<tr><td class='text-center' colspan='6'>No Users Found</td></tr>";
                 }
                 ?>
               </table>
@@ -240,3 +245,24 @@ $userlist = $dbconnection->getUsers();
       </ul>
     </div>
   </main>
+
+  <script>
+  $(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.css("text-security") == "disc")
+  {
+    input.css("-webkit-text-security", "none");
+    input.css("-moz-text-security", "none");
+  }
+  else {
+    {
+      input.css("-webkit-text-security", "disc");
+      input.css("-moz-text-security", "disc");
+    }
+  }
+  });
+  </script>
+</body>
+</html>

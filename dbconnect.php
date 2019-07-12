@@ -21,7 +21,7 @@ error_reporting(E_ALL);
     public function checkLogin($username, $password)//checks username and password from the table of the databse
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT id, username, name, role_type FROM login_credentials WHERE username = ? AND password = ?");
+      $query = $dblink->prepare("SELECT id, username, name, role_type FROM login_credentials WHERE username = ? AND password = ? AND disabled = 0");
       $query->bind_param("ss", $username, $password);
       $query->execute();
       return $query->get_result();
@@ -80,21 +80,12 @@ error_reporting(E_ALL);
 
 // Function to get an approved post
 
-    public function getPost($id, $source = '')
+    public function getPost($id)
     {
       global $dblink;
-      if($source == 'from Review')
-      {
-        $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE auth_id1 = ? OR auth_id2 = ?");//showing of the local results after accessing results from the posts table
-        $query->bind_param("ss", $id, $id);
-        $query->execute();
-      }
-      else
-      {
-        $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
-        $query->bind_param("s", $id);
-        $query->execute();
-      }
+      $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
+      $query->bind_param("i", $id);
+      $query->execute();
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
     }
 
@@ -102,8 +93,8 @@ error_reporting(E_ALL);
 
     public function getunapproved($auth_id){
     global $dblink;
-    $query = $dblink->prepare("SELECT title, description, resolution FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
-    $query->bind_param("ss", $auth_id, $auth_id);
+    $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE auth_id1 = ? OR auth_id2 = ?");//showing of the local results after accessing results from the posts table
+    $query->bind_param("ii", $auth_id, $auth_id);
     $query->execute();
     return ($query->get_result());
   }
@@ -139,7 +130,7 @@ error_reporting(E_ALL);
   if($result->num_rows > 0)
   {
     $row = $result->fetch_array(MYSQLI_ASSOC);
-    if($row['auth_id1'] == $auth_id)
+    if($row['auth_id1'] == $id)
     {
       $target = 'auth_id1';
       $other_authid = 'auth_id2';
@@ -150,7 +141,7 @@ error_reporting(E_ALL);
       $other_authid = 'auth_id1';
     }
     $query = $dblink->prepare("UPDATE posts SET $target = 0 WHERE auth_id1 = ? OR auth_id2 = ?");
-    $query->bind_param("ss", $auth_id, $auth_id);
+    $query->bind_param("ii", $id, $id);
     $query->execute();
     if($row[$other_authid] == 0)
     {
@@ -201,7 +192,7 @@ error_reporting(E_ALL);
 public function getUsers()
 {
   global $dblink;
-  $query = $dblink->prepare("SELECT id, name, username, role_type FROM login_credentials");
+  $query = $dblink->prepare("SELECT id, name, username, password, role_type FROM login_credentials WHERE disabled = 0");
   $query->execute();
   return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
 }
@@ -223,10 +214,14 @@ public function updateUser($name, $username, $password, $email, $role_type, $id)
   $query->execute();
 }
 
+/*Function to delete User.
+ *Instead of completely deleting user details from database, simply sets a disabled field
+ *in order to preserve user details(Name, Username) to display on the posts created by the user.
+ */
 public function deleteUser($id)
 {
   global $dblink;
-  $query = $dblink->prepare("DELETE FROM login_credentials WHERE id = ?");
+  $query = $dblink->prepare("UPDATE login_credentials SET disabled = 1 WHERE id = ?");
   $query->bind_param("i", $id);
   $query->execute();
 }

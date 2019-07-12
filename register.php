@@ -97,6 +97,9 @@ if($_SESSION['role_type'] != 'superadmin')
                               <button type="submit" class="btn btn-secondary btn-block">Log in</button>
                           </div>
                       </form>
+                      <div class="form-group">
+                          <a href="superadmin.php"><button type="buton" class="btn btn-secondary btn-block">Cancel</button></a>
+                      </div>
                   </div>
               </div>
           </div>

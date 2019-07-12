@@ -745,6 +745,15 @@ div.bottom-nav {
   color: #222222
 }
 
+.securetext {
+  -webkit-text-security: disc;
+  -moz-text-security: disc;
+}
+
+.toggle-password {
+  float: right;
+}
+
 /* Dropdown */
 label.dropdown {
   display: inline-block;

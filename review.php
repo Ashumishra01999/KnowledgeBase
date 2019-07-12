@@ -85,6 +85,10 @@ else
        echo '<p class="successmessage">'.$_SESSION['success'].'</p>';
        unset($_SESSION['success']);
      }
+     echo '<div class="post-details">
+          <p class="author">Author: '.htmlentities($post['name']).'('.htmlentities($post['username']).')</p>
+          <p class="posttime">Added on: '.date("F j, Y", strtotime($post['creation_time'])).'</p>
+          </div>';
           echo  '<p class="titlelabel"><b>Title</b></p>
             <p class="title">'.htmlentities($post['title']).'</p>
             <p class="descriptionlabel"><b>Description</b></p>

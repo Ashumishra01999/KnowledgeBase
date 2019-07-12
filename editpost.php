@@ -38,7 +38,7 @@ if(isset($_POST['action']))
 
 // If get id is not set, redirect to superadmin panel
 
-if(!isset($_GET['post_id']) && isset($_SESSION['username']))
+if(!isset($_GET['post_id']) && isset($_SESSION['username']) && !isset($_GET['auth_id']))
 {
   $_SESSION['error'] = "Missing Post ID";
   header('Location: superadmin.php');
@@ -52,7 +52,8 @@ if(isset($_GET['post_id']))
 }
 else
 {
-  $post = $dbconnection->getPost($_GET['auth_id'], 'from Review');
+  $result = $dbconnection->getunapproved($_GET['auth_id']);
+  $post = $result->fetch_array(MYSQLI_ASSOC);
 }
 
 ?>
