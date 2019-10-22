@@ -31,7 +31,7 @@ $userlist = $dbconnection->getUsers();
   <link rel="stylesheet" href="css\style.css">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
-  <script src="js/javascript.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery/1.12.4/jquery.min.js"></script>
 </head>
 <body>
   <header>

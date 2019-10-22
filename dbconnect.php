@@ -83,7 +83,7 @@ error_reporting(E_ALL);
     public function getPost($id)
     {
       global $dblink;
-      $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
+      $query = $dblink->prepare("SELECT login_credentials.name, login_credentials.username, post_id ,title, description, resolution, approved, creation_time, upvotes FROM posts INNER JOIN login_credentials ON posts.user_id=login_credentials.id WHERE post_id = ?");//showing of the local results after accessing results from the posts table
       $query->bind_param("i", $id);
       $query->execute();
       return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
@@ -101,60 +101,61 @@ error_reporting(E_ALL);
 
 // Funtion for approving a post by an admin
 
-  public function approvepost($id, $is_superadmin){
-  global $dblink;
-  if($is_superadmin)
+  public function approvepost($id, $is_superadmin)
   {
-    $query = $dblink->prepare("SELECT approved FROM posts WHERE post_id = ?");
-    $query->bind_param("i", $id);
-    $query->execute();
-    $result = $query->get_result();
-    if($result->num_rows > 0)
+    global $dblink;
+    if($is_superadmin)
     {
-      $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ?");
+      $query = $dblink->prepare("SELECT approved FROM posts WHERE post_id = ?");
       $query->bind_param("i", $id);
       $query->execute();
-      return 1;
+      $result = $query->get_result();
+      if($result->num_rows > 0)
+      {
+        $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ?");
+        $query->bind_param("i", $id);
+        $query->execute();
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
     }
     else
     {
-      return 0;
-    }
-  }
-  else
-  {
-  $query = $dblink->prepare("SELECT post_id, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
-  $query->bind_param("ii", $id, $id);
-  $query->execute();
-  $result = $query->get_result();
-  if($result->num_rows > 0)
-  {
-    $row = $result->fetch_array(MYSQLI_ASSOC);
-    if($row['auth_id1'] == $id)
-    {
-      $target = 'auth_id1';
-      $other_authid = 'auth_id2';
-    }
-    else
-    {
-      $target = 'auth_id2';
-      $other_authid = 'auth_id1';
-    }
-    $query = $dblink->prepare("UPDATE posts SET $target = 0 WHERE auth_id1 = ? OR auth_id2 = ?");
-    $query->bind_param("ii", $id, $id);
-    $query->execute();
-    if($row[$other_authid] == 0)
-    {
-      $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ".$row['post_id']);
+      $query = $dblink->prepare("SELECT post_id, auth_id1, auth_id2 FROM posts WHERE auth_id1 = ? OR auth_id2 = ?");
+      $query->bind_param("ii", $id, $id);
       $query->execute();
+      $result = $query->get_result();
+      if($result->num_rows > 0)
+      {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+        if($row['auth_id1'] == $id)
+        {
+          $target = 'auth_id1';
+          $other_authid = 'auth_id2';
+        }
+        else
+        {
+          $target = 'auth_id2';
+          $other_authid = 'auth_id1';
+        }
+        $query = $dblink->prepare("UPDATE posts SET $target = 0 WHERE auth_id1 = ? OR auth_id2 = ?");
+        $query->bind_param("ii", $id, $id);
+        $query->execute();
+        if($row[$other_authid] == 0)
+        {
+          $query = $dblink->prepare("UPDATE posts SET approved = 1 WHERE post_id = ".$row['post_id']);
+          $query->execute();
+        }
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
     }
-    return 1;
-  }
-  else
-  {
-    return 0;
-  }
-  }
   }
 
 // Function to get all posts (approved and unapproved)
@@ -180,50 +181,128 @@ error_reporting(E_ALL);
 // Function to edit a post in superadmin Panel
 
   public function editPost($title, $description, $resolution, $post_id)
-{
-  global $dblink;
-  $query = $dblink->prepare("UPDATE posts SET title = ?, description = ?, resolution = ? WHERE post_id = ?");
-  $query->bind_param("ssss", $title,$description,$resolution,$post_id);
-  $query->execute();
-}
+  {
+    global $dblink;
+    $query = $dblink->prepare("UPDATE posts SET title = ?, description = ?, resolution = ? WHERE post_id = ?");
+    $query->bind_param("ssss", $title,$description,$resolution,$post_id);
+    $query->execute();
+  }
+
+  public function upvote($post_id, $user_id, $revoke_upvote = false)
+  {
+    global $dblink;
+    if($revoke_upvote)
+    {
+      $query = $dblink->prepare("DELETE FROM upvotes WHERE post_id = ? AND user_id = ?");
+      $query->bind_param("ii", $post_id, $user_id);
+      if($query->execute())
+      {
+        return 1;
+      }
+    }
+    else
+    {
+      $query = $dblink->prepare("INSERT INTO  upvotes (post_id, user_id) values(?, ?)");
+      $query->bind_param("ii", $post_id, $user_id);
+      if($query->execute())
+      {
+        return 1;
+      }
+    }
+    return 0;
+  }
 
 // Function to display all users in superadmin panel
 
-public function getUsers()
-{
-  global $dblink;
-  $query = $dblink->prepare("SELECT id, name, username, password, role_type FROM login_credentials WHERE disabled = 0");
-  $query->execute();
-  return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
-}
+  public function getUsers()
+  {
+    global $dblink;
+    $query = $dblink->prepare("SELECT id, name, username, password, role_type FROM login_credentials WHERE disabled = 0");
+    $query->execute();
+    return ($query->get_result())->fetch_all(MYSQLI_ASSOC);
+  }
 
-public function getUser($id)
-{
-  global $dblink;
-  $query = $dblink->prepare("SELECT id, name, username, role_type, email, password FROM login_credentials WHERE id = ?");
-  $query->bind_param("i", $id);
-  $query->execute();
-  return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
-}
+  public function getUser($id)
+  {
+    global $dblink;
+    $query = $dblink->prepare("SELECT id, name, username, role_type, email, password FROM login_credentials WHERE id = ?");
+    $query->bind_param("i", $id);
+    $query->execute();
+    return ($query->get_result())->fetch_array(MYSQLI_ASSOC);
+  }
 
-public function updateUser($name, $username, $password, $email, $role_type, $id)
-{
-  global $dblink;
-  $query = $dblink->prepare("UPDATE login_credentials SET name = ?,  username = ?, password = ?, email = ?, role_type = ? WHERE id = ?");
-  $query->bind_param("sssssi", $name, $username, $password, $email, $role_type, $id);
-  $query->execute();
-}
+  public function updateUser($name, $username, $password, $email, $role_type, $id)
+  {
+    global $dblink;
+    $query = $dblink->prepare("UPDATE login_credentials SET name = ?,  username = ?, password = ?, email = ?, role_type = ? WHERE id = ?");
+    $query->bind_param("sssssi", $name, $username, $password, $email, $role_type, $id);
+    $query->execute();
+  }
 
 /*Function to delete User.
  *Instead of completely deleting user details from database, simply sets a disabled field
  *in order to preserve user details(Name, Username) to display on the posts created by the user.
  */
-public function deleteUser($id)
-{
-  global $dblink;
-  $query = $dblink->prepare("UPDATE login_credentials SET disabled = 1 WHERE id = ?");
-  $query->bind_param("i", $id);
-  $query->execute();
-}
+ public function deleteUser($id)
+ {
+   global $dblink;
+   $query = $dblink->prepare("UPDATE login_credentials SET disabled = 1 WHERE id = ?");
+   $query->bind_param("i", $id);
+   $query->execute();
+ }
 
+ public function upvotestatus($post_id, $user_id)
+ {
+   global $dblink;
+   $query = $dblink->prepare("SELECT post_id FROM upvotes WHERE post_id = ? AND user_id = ?");
+   $query->bind_param("ii", $post_id, $user_id);
+   $query->execute();
+   if(($query->get_result())->num_rows > 0)
+   {
+     return true;
+   }
+   else
+   {
+     return false;
+   }
+ }
+
+ public function upvotepost($post_id, $user_id, $likes)
+ {
+   global $dblink;
+   $query = $dblink->prepare("INSERT INTO upvotes (post_id, user_id) values(?, ?)");
+   $query->bind_param("ii", $post_id, $user_id);
+   if($query->execute())
+   {
+     $query = $dblink->prepare("UPDATE posts SET upvotes = ? WHERE post_id = ?");
+     $likes = $likes + 1;
+     $query->bind_param("ii", $likes, $post_id);
+     $query->execute();
+     return 1;
+   }
+   else
+   {
+     return 0;
+   }
+ }
+
+ public function removeupvote($post_id, $user_id, $likes)
+ {
+   global $dblink;
+   $query = $dblink->prepare("DELETE FROM upvotes WHERE post_id = ? AND user_id = ?");
+   $query->bind_param("ii", $post_id, $user_id);
+   $query->execute();
+   if($query->execute())
+   {
+     $query = $dblink->prepare("UPDATE posts SET upvotes = ? WHERE post_id = ?");
+     $likes = $likes - 1;
+     $query->bind_param("ii", $likes, $post_id);
+     $query->execute();
+     return 1;
+   }
+   else
+   {
+     return 0;
+   }
+}
 }

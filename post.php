@@ -14,6 +14,17 @@ if(!isset($_SESSION['username']))
 $dbconnection = new dbconnector;
 $dbconnection->connect();
 $post = $dbconnection->getPost($_GET['post_id']);
+$upvoted = $dbconnection->upvotestatus($_GET['post_id'], $_SESSION['user_id']);
+if($upvoted)
+{
+  $buttonstatus = 'upvote-active';
+  $buttontext = 'Upvoted';
+}
+else
+{
+  $buttonstatus = '';
+  $buttontext = 'Upvote';
+}
 
 ?>
 <!Doctype html>
@@ -21,7 +32,9 @@ $post = $dbconnection->getPost($_GET['post_id']);
 <head>
   <title><?php echo $post['title'].' - Knowledge Center'; ?></title>
   <link rel="stylesheet" href="css\style.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <link rel="icon" type="image/png" href="images\favicon.png">
+  <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
 </head>
 <body>
   <header>
@@ -60,10 +73,10 @@ $post = $dbconnection->getPost($_GET['post_id']);
     <div class="postcontainer">
 
       <?php
-      if(isset($_SESSION['approved']) && $_SESSION['approved'] == true)
+      if(isset($_SESSION['success']))
       {
-        echo '<p class="successmessage">Issue approved successfully.</p>';
-        unset($_SESSION['approved']);
+        echo '<p class="successmessage">'.$_SESSION['success'].'</p>';
+        unset($_SESSION['success']);
       }
         if($post['approved'] == 1 || $_SESSION['role_type'] == 'superadmin')
         {
@@ -87,6 +100,7 @@ $post = $dbconnection->getPost($_GET['post_id']);
           displayerror('Unauthorised Access');
         }
       ?>
+      <button type="button" class="upvote-button <?= $buttonstatus ?>" id="<?= $post['upvotes'].'_'.$_SESSION['user_id'] ?>"><i class="fa fa-thumbs-up" aria-hidden="true"></i><?= $buttontext.'('.$post['upvotes'].')' ?></button>
     </div>
 
 <!-- Display admin dashboard, edit and approve button for superadmin account -->
@@ -132,5 +146,50 @@ $post = $dbconnection->getPost($_GET['post_id']);
 ?>
 </div>
 </main>
+<script>
+$(".upvote-button").click(function(){
+        var split_id = ($(this).attr('id')).split("_");
+        var post_id = new RegExp('[\?&]' + 'post_id' + '=([^&#]*)').exec(window.location.href);
+        post_id = post_id[1];
+        var like_count = parseInt(split_id[0]);
+        var user_id = split_id[1];
+        if(!($(".upvote-button").hasClass("upvote-button upvote-active")))
+        {
+          $.ajax({
+              url: 'upvote.php',
+              type: 'post',
+              data: {post_id:post_id,user_id:user_id,upvote:"1",likes:like_count},
+              success: function(response){
+                if(response == '1')
+                {
+                  $(".upvote-button").toggleClass("upvote-active", true);
+                  like_count = like_count+1;
+                  $(".upvote-button").prop('id', like_count+'_'+user_id);
+                  $(".upvote-button").html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>Upvoted('+like_count+')');
+                }
+              }
+
+          });
+        }
+        else
+        {
+          $.ajax({
+              url: 'upvote.php',
+              type: 'post',
+              data: {post_id:post_id,user_id:user_id,upvote:"0",likes:like_count},
+              success: function(response){
+                if(response == '1')
+                {
+                  $(".upvote-button").toggleClass("upvote-active", false);
+                  like_count = like_count-1;
+                  $(".upvote-button").prop('id', like_count+'_'+user_id);
+                  $(".upvote-button").html('<i class="fa fa-thumbs-up" aria-hidden="true"></i>Upvote('+like_count+')');
+                }
+              }
+
+          });
+        }
+    });
+</script>
 </body>
 </html>

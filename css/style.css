@@ -241,7 +241,7 @@ header * {
 }
 
 header li {
-  margin: 20px;
+  margin: 10px;
 }
 
 header li a {
@@ -839,4 +839,26 @@ label.dropdown {
 
 .confirm-action>p {
   font-size: 1.5rem;
+}
+
+.upvote-button {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 5px 20px 5px 20px;
+  margin: 0px 16px 12px 16px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+  z-index: 0;
+}
+
+.upvote-active:hover {
+  background-color: #1b926c;
+}
+
+.upvote-active {
+  background-color: #1fa67a;
+  color: white;
+  border: 1px solid #1b926c;
 }

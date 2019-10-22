@@ -15,7 +15,7 @@ if(isset($_SESSION['username']))
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" type="image/png" href="images\favicon.png">
     </head>
-    <body onload="autoFill();">
+    <body>
       <div class="container-fluid">
         <nav>
         </nav>

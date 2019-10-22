@@ -21,19 +21,9 @@ $dbconnection->connect();
 
 if(isset($_POST['action']))
 {
-  if($_POST['action'] == 'update')
-  {
-    $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
-    $_SESSION['success'] = 'Record Updated';
-  }
-  if(isset($_POST['auth_id']))
-  {
-    header('Location: review.php?auth_id='.$_POST['auth_id']);
-  }
-  else
-  {
-    header( 'Location: superadmin.php' );
-  }
+  $dbconnection->editPost($_POST['title'], $_POST['description'], $_POST['resolution'],$_POST['post_id']);
+  $_SESSION['success'] = 'Record Updated';
+  header( 'Location:'.$_POST['action'] );
 }
 
 // If get id is not set, redirect to superadmin panel
@@ -83,7 +73,7 @@ else
                             </div>
                         </form>
                       </li>
-                        <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</a></li>
+                        <li><a class = "nav-darklnk" href="addissue.php"><button type="submit" class="nav-btn">Add Issue</button></a></li>
                           <?php
                           if(isset($_SESSION['username']))
                           {
@@ -147,8 +137,18 @@ else
                 { echo '<input type="hidden" name="auth_id" value="'.$_GET['auth_id'].'">'; }
           ?>
           <input type="hidden" name="moderator" value="<?= isset($_GET['auth_id'])? 'admin' : 'superadmin' ?>">
-          <button type="submit" name="action" value="update" class="btn btn-secondary" >Update</button>
-          <button type="submit" name="action" value="cancel" class="btn btn-secondary" >Cancel</button>
+          <?php
+          if(isset($_SERVER['HTTP_REFERER']))
+          {
+            $backlink = htmlspecialchars($_SERVER['HTTP_REFERER']);
+          }
+          else
+          {
+            $backlink = htmlspecialchars($_SERVER["PHP_SELF"]."?post_id=".$_GET['post_id']);
+          }
+           ?>
+          <button type="submit" name="action" value="<?= $backlink ?>" class="btn btn-secondary" >Update</button>
+          <a class="nav-darklnk" href="<?= $backlink ?>"><button type="button" name="cancel" value="cancel" class="btn btn-secondary" formnovalidate="formnovalidate" >Cancel</button></a>
       </form>
       <?php
     }
@@ -164,7 +164,7 @@ else
     $(function() {
       // Initialize form validation on the registration form.
       // It has the name attribute "registration"
-      $("form[name='addissue']").validate({
+      $("form[name='editissue']").validate({
       // Specify validation rules
   rules: {
     title: {
@@ -184,17 +184,17 @@ else
   // Specify validation error messages
   messages: {
     title: {
-      required: "<br>Please provide a title",
-      minlength: "<br>The title must be at least 10 characters long",
-      maxlength: "<br>The title must be less than 250 characters long"
+      required: "Please provide a title",
+      minlength: "The title must be at least 10 characters long",
+      maxlength: "The title must be less than 250 characters long"
     },
     description: {
-      required: "<br>Please provide a description",
-      minlength: "<br>The description must be at least 10 characters long"
+      required: "Please provide a description",
+      minlength: "The description must be at least 10 characters long"
     },
     resolution: {
-      required: "<br>Please provide a resolution",
-      minlength: "<br>The resolution must be at least 10 characters long"
+      required: "Please provide a resolution",
+      minlength: "The resolution must be at least 10 characters long"
     },
   },
   // Make sure the form is submitted to the destination defined

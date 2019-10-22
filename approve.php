@@ -31,7 +31,7 @@ elseif(isset($_POST['post_id']) && $_SESSION['role_type'] == 'superadmin')
   $status = $dbconnection->approvepost($_POST['post_id'], 1);
   if($status == 1)
   {
-    $_SESSION['approved'] = true;
+    $_SESSION['success'] = 'Issue approved successfully.';
     header('Location:post.php?post_id='.$_POST['post_id']);
   }
   else
